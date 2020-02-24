@@ -117,9 +117,15 @@ int main(int argc,char** argv)
   auto detConstruction = new B4DetectorConstruction();
   runManager->SetUserInitialization(detConstruction);
 
-  G4VModularPhysicsList* physicsList = new QGSP_BERT;
+  G4VModularPhysicsList* physicsList = new G4VModularPhysicsList ();
   physicsList->RegisterPhysics(new G4EmPenelopePhysics);
-
+  
+  /*G4VModularPhysicsList* physicsList = new G4VModularPhysicsList ();
+  physicsList->RegisterPhysics(new G4EmLivermorePhysics);*/
+  
+  
+  //G4VModularPhysicsList* physicsList = new QBBC();
+  
   physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
   

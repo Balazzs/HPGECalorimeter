@@ -1,5 +1,7 @@
 /run/numberOfThreads 4
 
+/cuts/setLowEdge 250 eV
+
 /run/initialize
 
 /gun/energy 1 MeV
