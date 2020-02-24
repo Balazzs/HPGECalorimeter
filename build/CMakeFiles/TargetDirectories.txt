@@ -1,7 +1,0 @@
-/home/balazzs/Documents/Egyetem/ModellingLab2/Ge_cube/build/CMakeFiles/install/strip.dir
-/home/balazzs/Documents/Egyetem/ModellingLab2/Ge_cube/build/CMakeFiles/install/local.dir
-/home/balazzs/Documents/Egyetem/ModellingLab2/Ge_cube/build/CMakeFiles/edit_cache.dir
-/home/balazzs/Documents/Egyetem/ModellingLab2/Ge_cube/build/CMakeFiles/exampleB4a.dir
-/home/balazzs/Documents/Egyetem/ModellingLab2/Ge_cube/build/CMakeFiles/rebuild_cache.dir
-/home/balazzs/Documents/Egyetem/ModellingLab2/Ge_cube/build/CMakeFiles/list_install_components.dir
-/home/balazzs/Documents/Egyetem/ModellingLab2/Ge_cube/build/CMakeFiles/install.dir
