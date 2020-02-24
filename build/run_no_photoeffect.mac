@@ -1,0 +1,12 @@
+/run/numberOfThreads 4
+
+/cuts/setLowEdge 250 eV
+
+/run/initialize
+
+
+/process/inactivate phot
+
+
+/gun/energy 1 MeV
+/run/beamOn 100000
