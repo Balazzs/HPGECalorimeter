@@ -1,0 +1,4 @@
+build/**/*.csv
+build/CMakeFiles/*
+build/.ipynb_checkpoints/*
+build/*.svg
