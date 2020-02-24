@@ -59,10 +59,6 @@ B4RunAction::B4RunAction()
   // Book histograms, ntuple
   //
   
-  // Creating histograms
-  analysisManager->CreateH1("Eabs","Edep in absorber", 100, 0., 1*MeV);
-  analysisManager->CreateH1("Labs","trackL in absorber", 100, 0., 1*m);
-  
   // Creating ntuple
   //
   analysisManager->CreateNtuple("B4", "Edep and TrackL");
@@ -98,31 +94,9 @@ void B4RunAction::BeginOfRunAction(const G4Run* /*run*/)
 
 void B4RunAction::EndOfRunAction(const G4Run* /*run*/)
 {
-  // print histogram statistics
-  //
-  auto analysisManager = G4AnalysisManager::Instance();
-  if ( analysisManager->GetH1(1) ) {
-    G4cout << G4endl << " ----> print histograms statistic ";
-    if(isMaster) {
-      G4cout << "for the entire run " << G4endl << G4endl; 
-    }
-    else {
-      G4cout << "for the local thread " << G4endl << G4endl; 
-    }
-    
-    G4cout << " EAbs : mean = " 
-       << G4BestUnit(analysisManager->GetH1(0)->mean(), "Energy") 
-       << " rms = " 
-       << G4BestUnit(analysisManager->GetH1(0)->rms(),  "Energy") << G4endl;
-    
-    G4cout << " LAbs : mean = " 
-      << G4BestUnit(analysisManager->GetH1(1)->mean(), "Length") 
-      << " rms = " 
-      << G4BestUnit(analysisManager->GetH1(1)->rms(),  "Length") << G4endl;
-  }
-
   // save histograms & ntuple
   //
+  auto analysisManager = G4AnalysisManager::Instance();
   analysisManager->Write();
   analysisManager->CloseFile();
 }

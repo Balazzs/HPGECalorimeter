@@ -69,11 +69,7 @@ void B4aEventAction::EndOfEventAction(const G4Event* event)
   
   // get analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
-  
-  // fill histograms
-  analysisManager->FillH1(0, fEnergyAbs);
-  analysisManager->FillH1(1, fTrackLAbs);
-  
+    
   // fill ntuple
   analysisManager->FillNtupleDColumn(0, fEnergyAbs);
   analysisManager->FillNtupleDColumn(1, fTrackLAbs);
@@ -81,6 +77,7 @@ void B4aEventAction::EndOfEventAction(const G4Event* event)
   
   // Print per event (modulo n)
   //
+  
   auto eventID = event->GetEventID();
   auto printModulo = G4RunManager::GetRunManager()->GetPrintProgress();
   if ( ( printModulo > 0 ) && ( eventID % printModulo == 0 ) ) {
