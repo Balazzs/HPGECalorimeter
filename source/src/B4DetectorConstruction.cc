@@ -110,7 +110,7 @@ void B4DetectorConstruction::DefineMaterials()
 G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
 {
   // Geometry parameters
-  G4double calorSize  = 10.*cm;
+  G4double calorSize  = 7.*cm;
 
   auto worldSize = 1.2 * calorSize;
   
@@ -154,9 +154,9 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   // Calorimeter
   //  
   auto calorimeterS
-    = new G4Box("Calorimeter",     // its name
-                 calorSize/2, calorSize/2, calorSize/2); // its size
-  //  = new G4Tubs ("Calorimeter", 0, calorSize/2, calorSize/2, 0, 2*M_PI);
+  //  = new G4Box("Calorimeter",     // its name
+  //               calorSize/2, calorSize/2, calorSize/2); // its size
+    = new G4Tubs ("Calorimeter", 0, calorSize/2, calorSize/2, 0, 2*M_PI);
   
   auto calorLV
     = new G4LogicalVolume(
