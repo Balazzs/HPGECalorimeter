@@ -1,7 +1,0 @@
-#class tools::wcsv::ntuple
-#title Edep and TrackL
-#separator 44
-#vector_separator 59
-#column double Eabs
-#column double Labs
-1,0.897425
