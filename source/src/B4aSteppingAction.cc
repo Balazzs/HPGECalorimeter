@@ -60,6 +60,7 @@ void B4aSteppingAction::UserSteppingAction(const G4Step* step)
   
   // energy deposit
   auto edep = step->GetTotalEnergyDeposit();
+  //G4cout << edep << G4endl;
   
   // step length
   G4double stepLength = 0.;
