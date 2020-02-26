@@ -94,9 +94,6 @@ void B4DetectorConstruction::DefineMaterials()
   G4double a;  // mass of a mole;
   G4double z;  // z=mean number of protons;  
   G4double density; 
-  new G4Material("liquidArgon", z=18., a= 39.95*g/mole, density= 1.390*g/cm3);
-         // The argon by NIST Manager is a gas with a different density
-
   // Vacuum
   new G4Material("Galactic", z=1., a=1.01*g/mole,density= universe_mean_density,
                   kStateGas, 2.73*kelvin, 3.e-18*pascal);
