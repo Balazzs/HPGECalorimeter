@@ -64,6 +64,10 @@ B4RunAction::B4RunAction()
   analysisManager->CreateNtuple("B4", "Edep and TrackL");
   analysisManager->CreateNtupleDColumn("Eabs");
   analysisManager->CreateNtupleDColumn("Labs");
+  
+  analysisManager->CreateNtupleDColumn("p_X");
+  analysisManager->CreateNtupleDColumn("p_Y");
+  analysisManager->CreateNtupleDColumn("p_Z");
   analysisManager->FinishNtuple();
 }
 

@@ -73,6 +73,9 @@ void B4aEventAction::EndOfEventAction(const G4Event* event)
   // fill ntuple
   analysisManager->FillNtupleDColumn(0, fEnergyAbs);
   analysisManager->FillNtupleDColumn(1, fTrackLAbs);
+  analysisManager->FillNtupleDColumn(2, exitDirection.x());
+  analysisManager->FillNtupleDColumn(3, exitDirection.y());
+  analysisManager->FillNtupleDColumn(4, exitDirection.z());
   analysisManager->AddNtupleRow();  
   
   // Print per event (modulo n)

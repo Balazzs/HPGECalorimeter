@@ -31,6 +31,7 @@
 #define B4aEventAction_h 1
 
 #include "G4UserEventAction.hh"
+#include "G4ThreeVector.hh"
 #include "globals.hh"
 
 /// Event action class
@@ -51,10 +52,12 @@ class B4aEventAction : public G4UserEventAction
     virtual void    EndOfEventAction(const G4Event* event);
     
     void AddAbs(G4double de, G4double dl);
+    void SetExitDirection (const G4ThreeVector& momentum);
     
   private:
-    G4double  fEnergyAbs;
-    G4double  fTrackLAbs;
+    G4double       fEnergyAbs;
+    G4double       fTrackLAbs;
+    G4ThreeVector  exitDirection;
 };
 
 // inline functions
@@ -64,6 +67,10 @@ inline void B4aEventAction::AddAbs(G4double de, G4double dl) {
   fTrackLAbs += dl;
 }
 
+inline void B4aEventAction::SetExitDirection (const G4ThreeVector& momentum)
+{
+  exitDirection = momentum;
+}
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif

@@ -30,6 +30,7 @@
 #include "B4aSteppingAction.hh"
 #include "B4aEventAction.hh"
 #include "B4DetectorConstruction.hh"
+#include "G4Gamma.hh"
 
 #include "G4Step.hh"
 #include "G4RunManager.hh"
@@ -70,6 +71,13 @@ void B4aSteppingAction::UserSteppingAction(const G4Step* step)
   
   if ( volume == fDetConstruction->GetAbsorberPV() ) {
     fEventAction->AddAbs(edep, stepLength);
+  }
+  
+  if (step->IsLastStepInVolume() && volume->GetName() == "World") {
+    if (step->GetTrack()->GetDefinition() == G4Gamma::Definition()) {
+      auto* photon = step->GetTrack()->GetDynamicParticle();
+      fEventAction->SetExitDirection (photon->GetMomentumDirection());
+    }
   }
   
 }
