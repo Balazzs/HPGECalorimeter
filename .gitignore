@@ -4,3 +4,4 @@ build/.ipynb_checkpoints/*
 build/*.svg
 build/*.png
 build/G4History.macro
+build/exampleB4a
