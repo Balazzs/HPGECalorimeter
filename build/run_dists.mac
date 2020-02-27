@@ -1,0 +1,8 @@
+/run/numberOfThreads 4
+
+/cuts/setLowEdge 250 eV
+
+/run/initialize
+
+
+/control/loop run_dist_helper.mac distance 0 20 1
