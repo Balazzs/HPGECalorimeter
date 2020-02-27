@@ -89,6 +89,7 @@ void B4DetectorConstruction::DefineMaterials()
   // Lead material defined using NIST Manager
   auto nistManager = G4NistManager::Instance();
   nistManager->FindOrBuildMaterial("G4_Ge");
+  nistManager->FindOrBuildMaterial("G4_AIR");
   
   // Liquid argon material
   G4double a;  // mass of a mole;
@@ -108,11 +109,12 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
 {
   // Geometry parameters
   G4double calorSize  = 7.*cm;
-
+  
   auto worldSize = 1.2 * calorSize;
+  auto ZSpace    = 1.0 *m;
   
   // Get materials
-  auto defaultMaterial = G4Material::GetMaterial("Galactic");
+  auto defaultMaterial = G4Material::GetMaterial("G4_AIR");
   auto absorberMaterial = G4Material::GetMaterial("G4_Ge");
   
   if ( ! defaultMaterial || ! absorberMaterial ) {
@@ -120,7 +122,7 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
     msg << "Cannot retrieve materials already defined."; 
     G4Exception("B4DetectorConstruction::DefineVolumes()",
       "MyCode0001", FatalException, msg);
-  }  
+  }
    
   //     
   // World
@@ -128,7 +130,7 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   
   auto worldS 
     = new G4Box("World",           // its name
-                 worldSize/2, worldSize/2, worldSize/2); // its size
+                 worldSize/2, worldSize/2, worldSize/2 + ZSpace); // its size
   
   auto worldLV
     = new G4LogicalVolume(
@@ -163,7 +165,7 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   
   fAbsorberPV = new G4PVPlacement(
                  0,                // no rotation
-                 G4ThreeVector(),  // at (0,0,0)
+                 G4ThreeVector(0, 0, calorSize/2),  // position
                  calorLV,          // its logical volume                         
                  "Calorimeter",    // its name
                  worldLV,          // its mother  volume
@@ -174,7 +176,7 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   G4cout
     << G4endl 
     << "------------------------------------------------------------" << G4endl
-    << "---> The calorimeter is a " << calorSize << " mm sized box"   << G4endl
+    << "---> The calorimeter is a " << calorSize << " mm cylinder"    << G4endl
     << "------------------------------------------------------------" << G4endl;
   
   //                                        
