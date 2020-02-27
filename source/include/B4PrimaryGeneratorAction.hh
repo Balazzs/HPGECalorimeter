@@ -31,6 +31,7 @@
 #define B4PrimaryGeneratorAction_h 1
 
 #include "G4VUserPrimaryGeneratorAction.hh"
+#include "G4GeneralParticleSource.hh"
 #include "globals.hh"
 
 class G4ParticleGun;
@@ -55,7 +56,7 @@ public:
   void SetRandomFlag(G4bool value);
 
 private:
-  G4ParticleGun*  fParticleGun; // G4 particle gun
+  G4GeneralParticleSource*  fParticleGun; // G4 particle gun
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

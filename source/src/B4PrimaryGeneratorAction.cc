@@ -46,15 +46,12 @@ B4PrimaryGeneratorAction::B4PrimaryGeneratorAction()
  : G4VUserPrimaryGeneratorAction(),
    fParticleGun(nullptr)
 {
-  G4int nofParticles = 1;
-  fParticleGun = new G4ParticleGun(nofParticles);
+  fParticleGun = new G4GeneralParticleSource();
 
   // default particle kinematic
   //
   auto particleDefinition = G4ParticleTable::GetParticleTable()->FindParticle("gamma");
   fParticleGun->SetParticleDefinition(particleDefinition);
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
-  fParticleGun->SetParticleEnergy(1.0*MeV);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -94,10 +91,10 @@ void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4Exception("B4PrimaryGeneratorAction::GeneratePrimaries()",
       "MyCode0002", JustWarning, msg);
   }
-    
+  
   // Set gun position
   fParticleGun->SetParticlePosition(G4ThreeVector(0., 0., -worldZHalfLength));
-
+  
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 
