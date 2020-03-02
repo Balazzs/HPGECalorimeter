@@ -43,6 +43,10 @@
 #include "G4EmLivermorePhysics.hh"
 #include "G4EmPenelopePhysics.hh"
 
+#include "G4RadioactiveDecayPhysics.hh"
+
+#include "G4NeutrinoE.hh"
+#include "G4AntiNeutrinoE.hh"
 
 #include "Randomize.hh"
 
@@ -59,6 +63,23 @@ namespace {
            << G4endl;
   }
 }
+
+class MyParticleConstructor : public G4VPhysicsConstructor{
+public:
+  MyParticleConstructor () :
+    G4VPhysicsConstructor("MyParticleConstructor")
+  { }
+  
+  void ConstructProcess () {}
+  
+  void ConstructParticle()
+  {
+    G4NeutrinoE::NeutrinoE();
+    G4AntiNeutrinoE::AntiNeutrinoE();
+  } 
+};
+
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -123,6 +144,8 @@ int main(int argc,char** argv)
   /*G4VModularPhysicsList* physicsList = new G4VModularPhysicsList ();
   physicsList->RegisterPhysics(new G4EmLivermorePhysics);*/
   
+  physicsList->RegisterPhysics(new G4RadioactiveDecayPhysics);
+  physicsList->RegisterPhysics(new MyParticleConstructor);
   
   //G4VModularPhysicsList* physicsList = new QBBC();
   
