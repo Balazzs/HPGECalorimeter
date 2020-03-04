@@ -40,6 +40,8 @@
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
 
+#include <fstream>
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 B4PrimaryGeneratorAction::B4PrimaryGeneratorAction()
@@ -62,6 +64,55 @@ B4PrimaryGeneratorAction::~B4PrimaryGeneratorAction()
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+#define GAMMA_FROM_TABLE
+
+struct Peak {
+  double E;
+  double probability;
+};
+
+std::vector<Peak> LoadCumulativeProbability ()
+{
+  std::vector<Peak> peaks;
+  
+  std::fstream file ("U_238.txt");
+  
+  Peak p;
+  double cum_prob = 0;
+  while (file >> p.E >> p.probability)
+  {
+    cum_prob += p.probability;
+    p.probability = cum_prob;
+    
+    peaks.push_back(p);
+  }
+  
+  for (Peak& peak: peaks) {
+    peak.probability /= cum_prob;
+  }
+  
+  return peaks;
+}
+
+double GenerateRandomEnergy ()
+{
+  static std::vector<Peak> peaks = LoadCumulativeProbability();
+  
+  double r = G4UniformRand();
+  
+  for(const Peak& p : peaks) {
+    if (r <= p.probability) {
+      return p.E;
+    }
+  }
+  
+  G4ExceptionDescription msg;
+    msg << "Error in probability distribution. Random number out of range";
+    G4Exception("B4PrimaryGeneratorAction::GeneratePrimaries()",
+      "MyCode0003", FatalException, msg);
+  return 0;
+}
 
 void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
@@ -94,6 +145,12 @@ void B4PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   
   // Set gun position
   fParticleGun->SetParticlePosition(G4ThreeVector(0., 0., -worldZHalfLength));
+  
+  #ifdef GAMMA_FROM_TABLE
+    double energy = GenerateRandomEnergy () * MeV;
+    fParticleGun->GetCurrentSource()->GetEneDist()->SetMonoEnergy (energy);
+    G4cout << "GPS energy:" << energy << G4endl;
+  #endif
   
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }

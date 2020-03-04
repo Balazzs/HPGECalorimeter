@@ -53,16 +53,20 @@ B4aEventAction::~B4aEventAction()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void B4aEventAction::BeginOfEventAction(const G4Event* /*event*/)
+void B4aEventAction::BeginOfEventAction(const G4Event* event)
 {  
   // initialisation per event
   fEnergyAbs = 0.;
   fTrackLAbs = 0.;
+  
+  //Log primary energy
+  G4PrimaryParticle* primary = event->GetPrimaryVertex()->GetPrimary();
+  G4cout << "primary energy:\t" << primary->GetTotalEnergy() << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void B4aEventAction::EndOfEventAction(const G4Event* event)
+void B4aEventAction::EndOfEventAction(const G4Event* /*event*/)
 {
   // Accumulate statistics
   //
@@ -76,11 +80,11 @@ void B4aEventAction::EndOfEventAction(const G4Event* event)
   analysisManager->FillNtupleDColumn(2, exitDirection.x());
   analysisManager->FillNtupleDColumn(3, exitDirection.y());
   analysisManager->FillNtupleDColumn(4, exitDirection.z());
-  analysisManager->AddNtupleRow();  
+  analysisManager->AddNtupleRow();
   
   // Print per event (modulo n)
   //
-  
+  /*
   auto eventID = event->GetEventID();
   auto printModulo = G4RunManager::GetRunManager()->GetPrintProgress();
   if ( ( printModulo > 0 ) && ( eventID % printModulo == 0 ) ) {
@@ -92,7 +96,7 @@ void B4aEventAction::EndOfEventAction(const G4Event* event)
        << "       total track length: " << std::setw(7)
                                         << G4BestUnit(fTrackLAbs,"Length")
        << G4endl;
-  }
+  }*/
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

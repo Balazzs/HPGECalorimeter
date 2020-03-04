@@ -1,0 +1,11 @@
+/run/numberOfThreads 4
+
+/cuts/setLowEdge 250 eV
+
+/run/initialize
+
+/gps/ang/type iso
+/gps/position 0 0 -5 cm
+/gps/energy 1 MeV
+
+/run/beamOn 100000
