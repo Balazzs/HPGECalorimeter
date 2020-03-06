@@ -52,6 +52,8 @@
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
 
+#define UNUSED(expr) do { (void)(expr); } while (0)
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4ThreadLocal 
@@ -308,6 +310,17 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
                                                            "CrystalHolderProtrusionTeflon",
                                                            calorimeterLogicalVolume,
                                                            false, 0, fCheckOverlaps);
+  
+  UNUSED(calorimeterPhysicalVolume);
+  UNUSED(endCapPhysicalVolume);
+  UNUSED(endCapDisk1PhysicalVolume);
+  UNUSED(endCapDisk2PhysicalVolume);
+  UNUSED(crystalPhysicalVolume);
+  UNUSED(crystalHolderPhysicalVolume);
+  UNUSED(crystalHolderDisk2PhysicalVolume);
+  UNUSED(protrusionPhysicalVolume);
+  UNUSED(protrusionDiskPhysicalVolume);
+  UNUSED(protrusionTeflonPhysicalVolume);
   
   //
   // Visualization attributes
