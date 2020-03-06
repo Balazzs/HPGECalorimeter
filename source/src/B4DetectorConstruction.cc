@@ -208,8 +208,8 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   // Calorimeter
   //
   
-  auto calorimeterSolid          = new G4Box ("Calorimeter", calorSize/2, calorSize/2, calorSize/2);
-  auto calorimeterLogicalVolume  = new G4LogicalVolume (calorimeterSolid, defaultMaterial, "Calorimeter");
+  auto calorimeterSolid          = new G4Tubs ("Calorimeter", 0, endCapOuterDiameter/2, endCapLength/2, 0, 2*M_PI);
+  auto calorimeterLogicalVolume  = new G4LogicalVolume (calorimeterSolid, vacuum, "Calorimeter");
   auto calorimeterPhysicalVolume = new G4PVPlacement (0, G4ThreeVector(0, 0, calorimeterShift),
                                                       calorimeterLogicalVolume,
                                                       "Calorimeter",
