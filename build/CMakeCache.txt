@@ -145,7 +145,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=B4a
+CMAKE_PROJECT_NAME:STATIC=HPGE
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -214,6 +214,12 @@ EXPAT_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libexpat.so
 
 //The directory containing a CMake configuration file for Geant4.
 Geant4_DIR:PATH=/usr/local/lib/Geant4-10.6.0
+
+//Value Computed by CMake
+HPGE_BINARY_DIR:STATIC=/home/balazzs/Documents/Egyetem/ModellingLab2/Ge_cube/build
+
+//Value Computed by CMake
+HPGE_SOURCE_DIR:STATIC=/home/balazzs/Documents/Egyetem/ModellingLab2/Ge_cube/source
 
 //Path to a file.
 OPENGL_EGL_INCLUDE_DIR:PATH=OPENGL_EGL_INCLUDE_DIR-NOTFOUND

@@ -6,3 +6,4 @@ build/*.png
 build/G4History.macro
 build/exampleB4a
 .ipynb_checkpoints/*
+build/hpge

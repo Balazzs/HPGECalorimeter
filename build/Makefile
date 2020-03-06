@@ -157,44 +157,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named exampleB4a
+# Target rules for targets named hpge
 
 # Build rule for target.
-exampleB4a: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 exampleB4a
-.PHONY : exampleB4a
+hpge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 hpge
+.PHONY : hpge
 
 # fast build rule for target.
-exampleB4a/fast:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/build
-.PHONY : exampleB4a/fast
+hpge/fast:
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/build
+.PHONY : hpge/fast
 
-exampleB4a.o: exampleB4a.cc.o
+hpge.o: hpge.cc.o
 
-.PHONY : exampleB4a.o
+.PHONY : hpge.o
 
 # target to build an object file
-exampleB4a.cc.o:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/exampleB4a.cc.o
-.PHONY : exampleB4a.cc.o
+hpge.cc.o:
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/hpge.cc.o
+.PHONY : hpge.cc.o
 
-exampleB4a.i: exampleB4a.cc.i
+hpge.i: hpge.cc.i
 
-.PHONY : exampleB4a.i
+.PHONY : hpge.i
 
 # target to preprocess a source file
-exampleB4a.cc.i:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/exampleB4a.cc.i
-.PHONY : exampleB4a.cc.i
+hpge.cc.i:
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/hpge.cc.i
+.PHONY : hpge.cc.i
 
-exampleB4a.s: exampleB4a.cc.s
+hpge.s: hpge.cc.s
 
-.PHONY : exampleB4a.s
+.PHONY : hpge.s
 
 # target to generate assembly for a file
-exampleB4a.cc.s:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/exampleB4a.cc.s
-.PHONY : exampleB4a.cc.s
+hpge.cc.s:
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/hpge.cc.s
+.PHONY : hpge.cc.s
 
 src/B4DetectorConstruction.o: src/B4DetectorConstruction.cc.o
 
@@ -202,7 +202,7 @@ src/B4DetectorConstruction.o: src/B4DetectorConstruction.cc.o
 
 # target to build an object file
 src/B4DetectorConstruction.cc.o:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4DetectorConstruction.cc.o
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4DetectorConstruction.cc.o
 .PHONY : src/B4DetectorConstruction.cc.o
 
 src/B4DetectorConstruction.i: src/B4DetectorConstruction.cc.i
@@ -211,7 +211,7 @@ src/B4DetectorConstruction.i: src/B4DetectorConstruction.cc.i
 
 # target to preprocess a source file
 src/B4DetectorConstruction.cc.i:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4DetectorConstruction.cc.i
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4DetectorConstruction.cc.i
 .PHONY : src/B4DetectorConstruction.cc.i
 
 src/B4DetectorConstruction.s: src/B4DetectorConstruction.cc.s
@@ -220,7 +220,7 @@ src/B4DetectorConstruction.s: src/B4DetectorConstruction.cc.s
 
 # target to generate assembly for a file
 src/B4DetectorConstruction.cc.s:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4DetectorConstruction.cc.s
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4DetectorConstruction.cc.s
 .PHONY : src/B4DetectorConstruction.cc.s
 
 src/B4PrimaryGeneratorAction.o: src/B4PrimaryGeneratorAction.cc.o
@@ -229,7 +229,7 @@ src/B4PrimaryGeneratorAction.o: src/B4PrimaryGeneratorAction.cc.o
 
 # target to build an object file
 src/B4PrimaryGeneratorAction.cc.o:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4PrimaryGeneratorAction.cc.o
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4PrimaryGeneratorAction.cc.o
 .PHONY : src/B4PrimaryGeneratorAction.cc.o
 
 src/B4PrimaryGeneratorAction.i: src/B4PrimaryGeneratorAction.cc.i
@@ -238,7 +238,7 @@ src/B4PrimaryGeneratorAction.i: src/B4PrimaryGeneratorAction.cc.i
 
 # target to preprocess a source file
 src/B4PrimaryGeneratorAction.cc.i:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4PrimaryGeneratorAction.cc.i
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4PrimaryGeneratorAction.cc.i
 .PHONY : src/B4PrimaryGeneratorAction.cc.i
 
 src/B4PrimaryGeneratorAction.s: src/B4PrimaryGeneratorAction.cc.s
@@ -247,7 +247,7 @@ src/B4PrimaryGeneratorAction.s: src/B4PrimaryGeneratorAction.cc.s
 
 # target to generate assembly for a file
 src/B4PrimaryGeneratorAction.cc.s:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4PrimaryGeneratorAction.cc.s
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4PrimaryGeneratorAction.cc.s
 .PHONY : src/B4PrimaryGeneratorAction.cc.s
 
 src/B4RunAction.o: src/B4RunAction.cc.o
@@ -256,7 +256,7 @@ src/B4RunAction.o: src/B4RunAction.cc.o
 
 # target to build an object file
 src/B4RunAction.cc.o:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4RunAction.cc.o
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4RunAction.cc.o
 .PHONY : src/B4RunAction.cc.o
 
 src/B4RunAction.i: src/B4RunAction.cc.i
@@ -265,7 +265,7 @@ src/B4RunAction.i: src/B4RunAction.cc.i
 
 # target to preprocess a source file
 src/B4RunAction.cc.i:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4RunAction.cc.i
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4RunAction.cc.i
 .PHONY : src/B4RunAction.cc.i
 
 src/B4RunAction.s: src/B4RunAction.cc.s
@@ -274,7 +274,7 @@ src/B4RunAction.s: src/B4RunAction.cc.s
 
 # target to generate assembly for a file
 src/B4RunAction.cc.s:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4RunAction.cc.s
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4RunAction.cc.s
 .PHONY : src/B4RunAction.cc.s
 
 src/B4aActionInitialization.o: src/B4aActionInitialization.cc.o
@@ -283,7 +283,7 @@ src/B4aActionInitialization.o: src/B4aActionInitialization.cc.o
 
 # target to build an object file
 src/B4aActionInitialization.cc.o:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4aActionInitialization.cc.o
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4aActionInitialization.cc.o
 .PHONY : src/B4aActionInitialization.cc.o
 
 src/B4aActionInitialization.i: src/B4aActionInitialization.cc.i
@@ -292,7 +292,7 @@ src/B4aActionInitialization.i: src/B4aActionInitialization.cc.i
 
 # target to preprocess a source file
 src/B4aActionInitialization.cc.i:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4aActionInitialization.cc.i
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4aActionInitialization.cc.i
 .PHONY : src/B4aActionInitialization.cc.i
 
 src/B4aActionInitialization.s: src/B4aActionInitialization.cc.s
@@ -301,7 +301,7 @@ src/B4aActionInitialization.s: src/B4aActionInitialization.cc.s
 
 # target to generate assembly for a file
 src/B4aActionInitialization.cc.s:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4aActionInitialization.cc.s
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4aActionInitialization.cc.s
 .PHONY : src/B4aActionInitialization.cc.s
 
 src/B4aEventAction.o: src/B4aEventAction.cc.o
@@ -310,7 +310,7 @@ src/B4aEventAction.o: src/B4aEventAction.cc.o
 
 # target to build an object file
 src/B4aEventAction.cc.o:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4aEventAction.cc.o
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4aEventAction.cc.o
 .PHONY : src/B4aEventAction.cc.o
 
 src/B4aEventAction.i: src/B4aEventAction.cc.i
@@ -319,7 +319,7 @@ src/B4aEventAction.i: src/B4aEventAction.cc.i
 
 # target to preprocess a source file
 src/B4aEventAction.cc.i:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4aEventAction.cc.i
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4aEventAction.cc.i
 .PHONY : src/B4aEventAction.cc.i
 
 src/B4aEventAction.s: src/B4aEventAction.cc.s
@@ -328,7 +328,7 @@ src/B4aEventAction.s: src/B4aEventAction.cc.s
 
 # target to generate assembly for a file
 src/B4aEventAction.cc.s:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4aEventAction.cc.s
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4aEventAction.cc.s
 .PHONY : src/B4aEventAction.cc.s
 
 src/B4aSteppingAction.o: src/B4aSteppingAction.cc.o
@@ -337,7 +337,7 @@ src/B4aSteppingAction.o: src/B4aSteppingAction.cc.o
 
 # target to build an object file
 src/B4aSteppingAction.cc.o:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4aSteppingAction.cc.o
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4aSteppingAction.cc.o
 .PHONY : src/B4aSteppingAction.cc.o
 
 src/B4aSteppingAction.i: src/B4aSteppingAction.cc.i
@@ -346,7 +346,7 @@ src/B4aSteppingAction.i: src/B4aSteppingAction.cc.i
 
 # target to preprocess a source file
 src/B4aSteppingAction.cc.i:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4aSteppingAction.cc.i
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4aSteppingAction.cc.i
 .PHONY : src/B4aSteppingAction.cc.i
 
 src/B4aSteppingAction.s: src/B4aSteppingAction.cc.s
@@ -355,7 +355,7 @@ src/B4aSteppingAction.s: src/B4aSteppingAction.cc.s
 
 # target to generate assembly for a file
 src/B4aSteppingAction.cc.s:
-	$(MAKE) -f CMakeFiles/exampleB4a.dir/build.make CMakeFiles/exampleB4a.dir/src/B4aSteppingAction.cc.s
+	$(MAKE) -f CMakeFiles/hpge.dir/build.make CMakeFiles/hpge.dir/src/B4aSteppingAction.cc.s
 .PHONY : src/B4aSteppingAction.cc.s
 
 # Help Target
@@ -367,13 +367,13 @@ help:
 	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... edit_cache"
-	@echo "... exampleB4a"
+	@echo "... hpge"
 	@echo "... rebuild_cache"
 	@echo "... list_install_components"
 	@echo "... install"
-	@echo "... exampleB4a.o"
-	@echo "... exampleB4a.i"
-	@echo "... exampleB4a.s"
+	@echo "... hpge.o"
+	@echo "... hpge.i"
+	@echo "... hpge.s"
 	@echo "... src/B4DetectorConstruction.o"
 	@echo "... src/B4DetectorConstruction.i"
 	@echo "... src/B4DetectorConstruction.s"

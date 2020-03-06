@@ -3,7 +3,7 @@
 # Setup the project
 #
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
-project(B4a)
+project(HPGE)
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -34,8 +34,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(exampleB4a exampleB4a.cc ${sources} ${headers})
-target_link_libraries(exampleB4a ${Geant4_LIBRARIES})
+add_executable(hpge hpge.cc ${sources} ${headers})
+target_link_libraries(hpge ${Geant4_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
@@ -43,12 +43,8 @@ target_link_libraries(exampleB4a ${Geant4_LIBRARIES})
 # relies on these scripts being in the current working directory.
 #
 set(EXAMPLEB4A_SCRIPTS
-#  exampleB4a.out
-#  exampleB4.in
   gui.mac
   init_vis.mac
-#  run1.mac
-#  run2.mac
   vis.mac
   )
 
@@ -63,4 +59,4 @@ endforeach()
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS exampleB4a DESTINATION bin)
+install(TARGETS hpge DESTINATION bin)
