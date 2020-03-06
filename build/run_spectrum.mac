@@ -1,0 +1,18 @@
+/run/numberOfThreads 4
+
+#/cuts/setLowEdge 250 eV
+
+/run/initialize
+
+/gps/pos/centre 0 0 -15 cm
+/gps/energy 0 eV
+
+/gps/particle ion
+/gps/ion 92 238
+
+/grdm/applyARM false
+
+/gps/source/list
+
+
+/run/beamOn 10000
