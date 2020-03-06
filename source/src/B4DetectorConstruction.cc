@@ -61,7 +61,7 @@ G4GlobalMagFieldMessenger* B4DetectorConstruction::fMagFieldMessenger = nullptr;
 
 B4DetectorConstruction::B4DetectorConstruction()
  : G4VUserDetectorConstruction(),
-   fAbsorberPV(nullptr),
+   absorberPV    (nullptr),
    fCheckOverlaps(true)
 {
 }
@@ -254,6 +254,8 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
                                                  "Crystal",
                                                  calorimeterLogicalVolume,
                                                  false, 0, fCheckOverlaps);
+  
+  absorberPV = crystalPhysicalVolume;
   
   //------------------------
   //----Crystal holder------

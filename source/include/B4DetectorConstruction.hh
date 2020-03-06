@@ -75,7 +75,7 @@ class B4DetectorConstruction : public G4VUserDetectorConstruction
     static G4ThreadLocal G4GlobalMagFieldMessenger*  fMagFieldMessenger; 
                                       // magnetic field messenger
      
-    G4VPhysicalVolume*   fAbsorberPV; // the absorber physical volume
+    G4VPhysicalVolume* absorberPV; // the absorber physical volume
     
     G4bool  fCheckOverlaps; // option to activate checking of volumes overlaps
 };
@@ -83,7 +83,7 @@ class B4DetectorConstruction : public G4VUserDetectorConstruction
 // inline functions
 
 inline const G4VPhysicalVolume* B4DetectorConstruction::GetAbsorberPV() const { 
-  return fAbsorberPV; 
+  return absorberPV; 
 }
      
 
