@@ -10,4 +10,4 @@
 /gps/position 0 0 -5 cm
 /gps/energy 1 MeV
 
-/run/beamOn 100000
+/run/beamOn 1000000
