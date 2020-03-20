@@ -47,11 +47,15 @@
 
 #include "G4NeutrinoE.hh"
 #include "G4AntiNeutrinoE.hh"
+#include "G4Neutron.hh"
 
 #include "Randomize.hh"
 
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
+
+
+#define U_238_DECAY_SIMULATION
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -76,6 +80,7 @@ public:
   {
     G4NeutrinoE::NeutrinoE();
     G4AntiNeutrinoE::AntiNeutrinoE();
+    G4Neutron::Neutron();
   } 
 };
 
