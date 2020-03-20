@@ -69,6 +69,7 @@ class B4DetectorConstruction : public G4VUserDetectorConstruction
     //
     void DefineMaterials();
     G4VPhysicalVolume* DefineVolumes();
+    G4VPhysicalVolume* DefineSimpleVolumes();
   
     // data members
     //

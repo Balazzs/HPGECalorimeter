@@ -81,6 +81,10 @@ G4VPhysicalVolume* B4DetectorConstruction::Construct()
   // Define materials 
   DefineMaterials();
   
+  #ifdef SIMPLE_GEOMETRY
+    return DefineSimpleVolumes ();
+  #endif
+  
   // Define volumes
   return DefineVolumes();
 }
@@ -110,63 +114,133 @@ void B4DetectorConstruction::DefineMaterials()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
-{  
-  // Geometry parameters
-  G4double crystalDiameter            = 51. *mm;
-  G4double crystalLength              = 42. *mm;
-  G4double crystalHoleDiameter        = 7.5 *mm;
-  G4double crystalHoleDepth           = 37.5*mm;
+const G4double crystalDiameter            = 51. *mm;
+const G4double crystalLength              = 42. *mm;
+const G4double crystalHoleDiameter        = 7.5 *mm;
+const G4double crystalHoleDepth           = 37.5*mm;
+
+const G4double endCapThickness            = 1.5 *mm;
+const G4double endCapOuterDiameter        = 7.6 *cm;
+const G4double endCapInnerDiameter        = endCapOuterDiameter - endCapThickness;
+const G4double endCapLength               = 7.  *cm;//TODO...
+
+const G4double crystalHolderThickness     = 0.76 *mm;
+const G4double crystalHolderInnerDiameter = crystalDiameter; //TODO actually there is a 0.5 mm boron layer on the outside of the crystal
+const G4double crystalHolderOuterDiameter = crystalHolderInnerDiameter + crystalHolderThickness;
+const G4double crystalHolderExtraLength   = 8. * mm;//TODO random guess
+const G4double crystalHolderLength        = crystalLength + crystalHolderExtraLength;
+const G4double crystalHolderEndThickness  = 3.2 *mm;
+
+const G4double protrusionLength           = 8. * mm;//TODO random guess
+const G4double protrusionThickness        = crystalHolderEndThickness;
+const G4double protrusionOuterDiameter    = 30 *mm;//TODO random guess
+const G4double protrusionInnerDiameter    = protrusionOuterDiameter - protrusionThickness;
+
+const G4double teflonDiameter             = protrusionInnerDiameter;
+const G4double teflonLength               = protrusionLength - protrusionThickness;//...
+
+// Positions - endcap starts at 0
+
+const G4double windowDistance          = 5. *mm;
+
+const G4double calorimeterShift        =  endCapLength / 2;
+const G4double START                   = -endCapLength / 2;
+
+const G4double endCapShift             = START + endCapLength / 2;
+const G4double endCapDisk1Shift        = START + endCapThickness / 2;
+const G4double endCapDisk2Shift        = START + endCapLength - endCapThickness / 2;
+
+const G4double crystalShift            = START + windowDistance + crystalLength / 2;
+const G4double crystalHoleRelShift     = crystalLength / 2 - crystalHoleDepth / 2;
+
+const G4double crystalHolderShift      = START + windowDistance + crystalHolderLength / 2;
+//const G4double crystalHolderDisk1Shift = START + windowDistance + crystalHolderThickness / 2;//What is on the front?
+const G4double crystalHolderDisk2Shift = START + windowDistance + crystalHolderLength - crystalHolderThickness / 2;
+
+const G4double protrusionShift         = START + windowDistance + crystalHolderLength + protrusionLength / 2;
+const G4double protrusionDiskShift     = START + windowDistance + crystalHolderLength + protrusionLength - protrusionThickness / 2;
+const G4double teflonShift             = START + windowDistance + crystalHolderLength + teflonLength / 2;
+
+//
+G4double calorSize = endCapLength * 1.1;
+
+const auto worldSize = 1.1 * calorSize;
+const auto ZSpace    = 1.0 *m;
+
+G4VPhysicalVolume* B4DetectorConstruction::DefineSimpleVolumes()
+{
+  // Get materials
+  auto defaultMaterial  = G4Material::GetMaterial("G4_AIR");
+  auto absorberMaterial = G4Material::GetMaterial("G4_Ge");
+  auto vacuum           = G4Material::GetMaterial("Galactic");
+  auto aluminium        = G4Material::GetMaterial("G4_Al");
   
-  G4double endCapThickness            = 1.5 *mm;
-  G4double endCapOuterDiameter        = 7.6 *cm;
-  G4double endCapInnerDiameter        = endCapOuterDiameter - endCapThickness;
-  G4double endCapLength               = 7.  *cm;//TODO...
-  
-  G4double crystalHolderThickness     = 0.76 *mm;
-  G4double crystalHolderInnerDiameter = crystalDiameter; //TODO actually there is a 0.5 mm boron layer on the outside of the crystal
-  G4double crystalHolderOuterDiameter = crystalHolderInnerDiameter + crystalHolderThickness;
-  G4double crystalHolderExtraLength   = 8. * mm;//TODO random guess
-  G4double crystalHolderLength        = crystalLength + crystalHolderExtraLength;
-  G4double crystalHolderEndThickness  = 3.2 *mm;
-  
-  G4double protrusionLength           = 8. * mm;//TODO random guess
-  G4double protrusionThickness        = crystalHolderEndThickness;
-  G4double protrusionOuterDiameter    = 30 *mm;//TODO random guess
-  G4double protrusionInnerDiameter    = protrusionOuterDiameter - protrusionThickness;
-  
-  G4double teflonDiameter             = protrusionInnerDiameter;
-  G4double teflonLength               = protrusionLength - protrusionThickness;//...
-  
-  // Positions - endcap starts at 0
-  
-  G4double windowDistance          = 5. *mm;
-  
-  G4double calorimeterShift        =  endCapLength / 2;
-  G4double START                   = -endCapLength / 2;
-  
-  G4double endCapShift             = START + endCapLength / 2;
-  G4double endCapDisk1Shift        = START + endCapThickness / 2;
-  G4double endCapDisk2Shift        = START + endCapLength - endCapThickness / 2;
-  
-  G4double crystalShift            = START + windowDistance + crystalLength / 2;
-  G4double crystalHoleRelShift     = crystalLength / 2 - crystalHoleDepth / 2;
-  
-  G4double crystalHolderShift      = START + windowDistance + crystalHolderLength / 2;
-  //G4double crystalHolderDisk1Shift = START + windowDistance + crystalHolderThickness / 2;//What is on the front?
-  G4double crystalHolderDisk2Shift = START + windowDistance + crystalHolderLength - crystalHolderThickness / 2;
-  
-  G4double protrusionShift         = START + windowDistance + crystalHolderLength + protrusionLength / 2;
-  G4double protrusionDiskShift     = START + windowDistance + crystalHolderLength + protrusionLength - protrusionThickness / 2;
-  G4double teflonShift             = START + windowDistance + crystalHolderLength + teflonLength / 2;
-  
+  if ( ! defaultMaterial || ! absorberMaterial || !vacuum || !aluminium ) {
+    G4ExceptionDescription msg;
+    msg << "Cannot retrieve materials already defined."; 
+    G4Exception("B4DetectorConstruction::DefineVolumes()",
+      "MyCode0001", FatalException, msg);
+  }
   
   //
-  G4double calorSize = endCapLength * 1.1;
+  // World
+  //
   
-  auto worldSize = 1.1 * calorSize;
-  auto ZSpace    = 1.0 *m;
+  auto worldS
+    = new G4Box("World",           // its name
+                 worldSize/2, worldSize/2, worldSize/2 + ZSpace); // its size
   
+  auto worldLV
+    = new G4LogicalVolume(
+                 worldS,           // its solid
+                 defaultMaterial,  // its material
+                 "World");         // its name
+  
+  auto worldPV
+    = new G4PVPlacement(
+                 0,                // no rotation
+                 G4ThreeVector(),  // at (0,0,0)
+                 worldLV,          // its logical volume
+                 "World",          // its name
+                 0,                // its mother  volume
+                 false,            // no boolean operation
+                 0,                // copy number
+                 fCheckOverlaps);  // checking overlaps 
+  
+  //
+  // Calorimeter
+  //
+  
+  
+  //------------------------
+  //--------Crystal---------
+  auto crystalCylinderSolid = new G4Tubs ("CrystalBase", 0, crystalDiameter/2,     crystalLength/2,    0, 2*M_PI);
+  
+  auto crystalLogicalVolume  = new G4LogicalVolume (crystalCylinderSolid, absorberMaterial, "Crystal");
+  auto crystalPhysicalVolume = new G4PVPlacement (0, G4ThreeVector(0, 0, crystalShift + calorimeterShift),//
+                                                 crystalLogicalVolume,
+                                                 "Crystal",
+                                                 worldLV,
+                                                 false, 0, fCheckOverlaps);
+  
+  absorberPV = crystalPhysicalVolume;
+  
+  UNUSED(crystalPhysicalVolume);
+  
+  //
+  // Visualization attributes
+  //
+  worldLV->SetVisAttributes (G4VisAttributes::GetInvisible());
+  crystalLogicalVolume->SetVisAttributes (new G4VisAttributes(G4Color(1.0, 0.5, 0.5)));
+  
+  //
+  // Always return the physical World
+  //
+  return worldPV;
+}
+
+G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
+{
   // Get materials
   auto defaultMaterial  = G4Material::GetMaterial("G4_AIR");
   auto absorberMaterial = G4Material::GetMaterial("G4_Ge");
