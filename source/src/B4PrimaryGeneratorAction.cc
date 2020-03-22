@@ -68,26 +68,36 @@ B4PrimaryGeneratorAction::~B4PrimaryGeneratorAction()
 #define GAMMA_FROM_TABLE
 
 struct Peak {
-  double E;
-  double probability;
+  double      E;
+  double      probability;
+  std::string isotope_name;
 };
 
 std::vector<Peak> LoadCumulativeProbability ()
 {
   std::vector<Peak> peaks;
   
-  std::fstream file ("U_238.txt");
+  std::ifstream file ("U_238.txt");
   
+  //header
+  std::string header_text;
+  file >> header_text >> header_text >> header_text;
+  
+  std::cout << "Hello" << header_text << std::endl;
+  
+  //data lines
   Peak p;
   double cum_prob = 0;
-  while (file >> p.E >> p.probability)
+  while (file >> p.isotope_name >> p.E >> p.probability)
   {
     cum_prob += p.probability;
     p.probability = cum_prob;
     
     peaks.push_back(p);
+    std::cout << p.probability << "\t" << p.E << std::endl;
   }
   
+  //normalize
   for (Peak& peak: peaks) {
     peak.probability /= cum_prob;
   }

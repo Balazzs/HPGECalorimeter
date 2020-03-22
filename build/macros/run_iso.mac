@@ -1,4 +1,4 @@
-/run/numberOfThreads 4
+/run/numberOfThreads 8
 
 /cuts/setLowEdge 250 eV
 
@@ -10,4 +10,4 @@
 /gps/position 0 0 -5 cm
 /gps/energy 1 MeV
 
-/run/beamOn 1000000
+/run/beamOn 10000000
