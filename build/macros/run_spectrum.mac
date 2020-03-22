@@ -4,7 +4,7 @@
 
 /run/initialize
 
-/gps/pos/centre 0 0 -15 cm
+/gps/pos/centre 0 0 -5 cm
 /gps/energy 0 eV
 
 /gps/particle ion
@@ -15,4 +15,4 @@
 /gps/source/list
 
 
-/run/beamOn 10000
+/run/beamOn 100000
