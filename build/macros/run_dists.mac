@@ -1,8 +1,9 @@
-/run/numberOfThreads 4
+/run/numberOfThreads 8
 
 /cuts/setLowEdge 250 eV
 
 /run/initialize
 
-
-/control/loop run_dist_helper.mac distance 0 20 1
+/control/shell mkdir distance_table_real_geom
+/control/loop macros/run_dist_helper.mac distance 0  10 1
+/control/loop macros/run_dist_helper.mac distance 10 20 2

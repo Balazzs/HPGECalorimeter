@@ -1,0 +1,7 @@
+/run/numberOfThreads 8
+
+/run/initialize
+
+
+/control/loop macros/run_dist_helper_simdecay.mac distance 1 10 1
+/control/loop macros/run_dist_helper_simdecay.mac distance 10 20 2

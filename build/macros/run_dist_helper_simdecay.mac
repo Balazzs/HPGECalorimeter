@@ -1,0 +1,12 @@
+/gps/ang/type iso
+/gps/position 0 0 -{distance} cm
+/gps/energy 0 eV
+/gps/particle ion
+/gps/ion 92 238
+/grdm/applyARM false
+
+/run/beamOn 100000
+
+/control/shell mkdir distance_simdecay_simple_geom
+/control/shell mkdir distance_simdecay_simple_geom/{distance}/
+/control/shell mv B4_nt_B4*.csv distance_simdecay_simple_geom/{distance}/
