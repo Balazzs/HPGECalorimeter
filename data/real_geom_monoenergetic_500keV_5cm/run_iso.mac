@@ -1,0 +1,13 @@
+/run/numberOfThreads 8
+
+/cuts/setLowEdge 250 eV
+
+/run/initialize
+
+/gps/ang/type iso
+/gps/ang/mintheta 90 deg
+/gps/ang/maxtheta 180 deg
+/gps/position 0 0 -5 cm
+/gps/energy 500 keV
+
+/run/beamOn 10000000
