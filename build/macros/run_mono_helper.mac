@@ -1,0 +1,10 @@
+/gps/ang/type iso
+/gps/ang/mintheta 90 deg
+/gps/ang/maxtheta 180 deg
+/gps/position 0 0 -5 cm
+/gps/energy {energy} keV
+
+/run/beamOn 1000000
+
+/control/shell mkdir mono_real_geom__energy/{energy}/
+/control/shell mv B4_nt_B4*.csv mono_real_geom__energy/{energy}/

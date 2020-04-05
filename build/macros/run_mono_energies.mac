@@ -1,0 +1,12 @@
+/run/numberOfThreads 8
+#/random/setSeeds 1763528	2317647
+#/random/setSeeds 3083451	2033571
+/random/setSeeds 1343189	3631998
+
+
+/cuts/setLowEdge 250 eV
+
+/run/initialize
+
+/control/shell mkdir mono_real_geom__energy
+/control/loop macros/run_mono_helper.mac energy 100 1000 100
