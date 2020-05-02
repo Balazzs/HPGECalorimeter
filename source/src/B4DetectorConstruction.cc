@@ -54,6 +54,8 @@
 
 #define UNUSED(expr) do { (void)(expr); } while (0)
 
+#define SAMPLE
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4ThreadLocal 
@@ -99,6 +101,8 @@ void B4DetectorConstruction::DefineMaterials()
   nistManager->FindOrBuildMaterial("G4_Al");
   nistManager->FindOrBuildMaterial("G4_AIR");
   nistManager->FindOrBuildMaterial("G4_TEFLON");
+  nistManager->FindOrBuildMaterial("G4_CALCIUM_CARBONATE");
+  nistManager->FindOrBuildMaterial("G4_PLEXIGLASS");
   
   // Liquid argon material
   G4double a;  // mass of a mole;
@@ -139,9 +143,16 @@ const G4double protrusionInnerDiameter    = protrusionOuterDiameter - protrusion
 const G4double teflonDiameter             = protrusionInnerDiameter;
 const G4double teflonLength               = protrusionLength - protrusionThickness;//...
 
+const G4double sampleDiameter             = 6.  *cm;
+const G4double sampleHeight               = 0.5 *cm;
+const G4double sampleHolderThickness      = 1.  *mm;
+const G4double sampleHolderInnerDiameter  = sampleDiameter;
+const G4double sampleHolderOuterDiameter  = sampleDiameter + 2 * sampleHolderThickness;
+
 // Positions - endcap starts at 0
 
 const G4double windowDistance          = 5. *mm;
+const G4double sampleDistance          = 5. *cm;
 
 const G4double calorimeterShift        =  endCapLength / 2;
 const G4double START                   = -endCapLength / 2;
@@ -161,6 +172,10 @@ const G4double protrusionShift         = START + windowDistance + crystalHolderL
 const G4double protrusionDiskShift     = START + windowDistance + crystalHolderLength + protrusionLength - protrusionThickness / 2;
 const G4double teflonShift             = START + windowDistance + crystalHolderLength + teflonLength / 2;
 
+const G4double sampleHolderDisk1Shift  = -sampleDistance - sampleHolderThickness / 2;
+const G4double sampleHolderShift       = sampleHolderDisk1Shift - sampleHeight / 2;
+const G4double sampleShift             = sampleHolderShift;
+
 //
 G4double calorSize = endCapLength * 1.1;
 
@@ -174,8 +189,10 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineSimpleVolumes()
   auto absorberMaterial = G4Material::GetMaterial("G4_Ge");
   auto vacuum           = G4Material::GetMaterial("Galactic");
   auto aluminium        = G4Material::GetMaterial("G4_Al");
+  auto CaCO3            = G4Material::GetMaterial("G4_CALCIUM_CARBONATE");
+  auto glass            = G4Material::GetMaterial("G4_PLEXIGLASS");
   
-  if ( ! defaultMaterial || ! absorberMaterial || !vacuum || !aluminium ) {
+  if ( ! defaultMaterial || ! absorberMaterial || !vacuum || !aluminium || !CaCO3 || !glass) {
     G4ExceptionDescription msg;
     msg << "Cannot retrieve materials already defined."; 
     G4Exception("B4DetectorConstruction::DefineVolumes()",
@@ -247,8 +264,12 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   auto vacuum           = G4Material::GetMaterial("Galactic");
   auto aluminium        = G4Material::GetMaterial("G4_Al");
   auto teflon           = G4Material::GetMaterial("G4_TEFLON");
+  auto CaCO3            = G4Material::GetMaterial("G4_CALCIUM_CARBONATE");
+  auto glass            = G4Material::GetMaterial("G4_PLEXIGLASS");
   
-  if ( ! defaultMaterial || ! absorberMaterial || !vacuum || !aluminium ) {
+  //TODO set temperature?
+  
+  if ( ! defaultMaterial || ! absorberMaterial || !vacuum || !aluminium || !CaCO3 || !glass) {
     G4ExceptionDescription msg;
     msg << "Cannot retrieve materials already defined."; 
     G4Exception("B4DetectorConstruction::DefineVolumes()",
@@ -385,6 +406,34 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
                                                            calorimeterLogicalVolume,
                                                            false, 0, fCheckOverlaps);
   
+  #ifdef SAMPLE
+  //------------------------
+  //---------sample---------
+  auto sampleSolid          = new G4Tubs ("Sample", 0, sampleDiameter/2, sampleHeight/2, 0, 2*M_PI);
+  auto sampleLogicalVolume  = new G4LogicalVolume (sampleSolid, CaCO3, "Sample");
+  auto samplePhysicalVolume = new G4PVPlacement (0, G4ThreeVector(0, 0, sampleShift),
+                                                 sampleLogicalVolume,
+                                                 "Sample",
+                                                 worldLV,
+                                                 false, 0, fCheckOverlaps);
+  
+  auto sampleHolderSideSolid          = new G4Tubs ("SampleHolderSide", sampleHolderInnerDiameter/2, sampleHolderOuterDiameter/2, sampleHeight/2, 0, 2*M_PI);
+  auto sampleHolderSideLogicalVolume  = new G4LogicalVolume (sampleHolderSideSolid, glass, "SampleHolderSide");
+  auto sampleHolderSidePhysicalVolume = new G4PVPlacement (0, G4ThreeVector(0, 0, sampleHolderShift),
+                                                           sampleHolderSideLogicalVolume,
+                                                           "SampleHolderSide",
+                                                           worldLV,
+                                                           false, 0, fCheckOverlaps);
+  
+  auto sampleHolderDisk1Solid          = new G4Tubs ("SampleHolderDisk1", 0, sampleHolderOuterDiameter/2, sampleHolderThickness/2, 0, 2*M_PI);
+  auto sampleHolderDisk1LogicalVolume  = new G4LogicalVolume (sampleHolderDisk1Solid, glass, "SampleHolderDisk1");
+  auto sampleHolderDisk1PhysicalVolume = new G4PVPlacement (0, G4ThreeVector(0, 0, sampleHolderDisk1Shift),
+                                                            sampleHolderDisk1LogicalVolume,
+                                                            "SampleHolderDisk1",
+                                                            worldLV,
+                                                            false, 0, fCheckOverlaps);
+  #endif
+  
   UNUSED(calorimeterPhysicalVolume);
   UNUSED(endCapPhysicalVolume);
   UNUSED(endCapDisk1PhysicalVolume);
@@ -395,6 +444,11 @@ G4VPhysicalVolume* B4DetectorConstruction::DefineVolumes()
   UNUSED(protrusionPhysicalVolume);
   UNUSED(protrusionDiskPhysicalVolume);
   UNUSED(protrusionTeflonPhysicalVolume);
+  #ifdef SAMPLE
+  UNUSED(samplePhysicalVolume);
+  UNUSED(sampleHolderSidePhysicalVolume);
+  UNUSED(sampleHolderDisk1PhysicalVolume);
+  #endif
   
   //
   // Visualization attributes

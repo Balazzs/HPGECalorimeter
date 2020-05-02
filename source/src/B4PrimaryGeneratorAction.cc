@@ -65,7 +65,7 @@ B4PrimaryGeneratorAction::~B4PrimaryGeneratorAction()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#define GAMMA_FROM_TABLE
+//#define GAMMA_FROM_TABLE
 
 struct Peak {
   double      E;

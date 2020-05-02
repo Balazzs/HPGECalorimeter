@@ -1,0 +1,20 @@
+/run/numberOfThreads 8
+
+/cuts/setLowEdge 250 eV
+
+/run/initialize
+
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/centre 0 0 -5.35
+/gps/pos/radius 3 cm
+/gps/pos/halfz 0.25
+/gps/pos/confine Sample
+
+/gps/ang/type iso
+/gps/energy 0 eV
+/gps/particle ion
+/gps/ion 92 238
+/grdm/applyARM false
+
+/run/beamOn 1000000
