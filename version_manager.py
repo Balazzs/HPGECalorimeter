@@ -3,7 +3,8 @@ import subprocess
 from time import sleep
 
 
-files = ["-r build", "-r source", "*.ipynb", "*.py", "*.txt"]
+files_before = ["-r build", "-r source", "-r macros", "*.ipynb", "*.py", "*.txt"]
+files_after  = ["-r run"]
 version_number_file = "version.txt"
 
 
@@ -18,7 +19,7 @@ with open(version_number_file, "w") as file:
 
 
 os.system("mkdir version_history/%i/" % version)
-for file in files:
+for file in files_before:
 	os.system("cp %s version_history/%i/" % (file, version))
 
 
@@ -37,3 +38,6 @@ while True:
 			print(output.strip())
 		break
 	sleep(0.01)
+
+for file in files_after:
+	os.system("cp %s version_history/%i/run/" % (file, version))
