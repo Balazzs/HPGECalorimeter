@@ -1,0 +1,10 @@
+/run/numberOfThreads 8
+
+/cuts/setLowEdge 250 eV
+
+/run/initialize
+
+
+/control/shell mkdir run/distance_simdecay_real_geom
+/control/loop macros/run_dist_helper_simdecay.mac distance 0  10 1
+/control/loop macros/run_dist_helper_simdecay.mac distance 10 30 2

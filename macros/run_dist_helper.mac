@@ -1,0 +1,10 @@
+/gps/ang/type iso
+/gps/ang/mintheta 90 deg
+/gps/ang/maxtheta 180 deg
+/gps/position 0 0 -{distance} cm
+/gps/energy 1 MeV
+
+/run/beamOn 1000000
+
+/control/shell mkdir run/distance_table_real_geom/{distance}/
+/control/shell mv B4_nt_B4*.csv distance_table_real_geom/{distance}/
