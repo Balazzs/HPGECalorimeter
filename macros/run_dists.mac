@@ -4,6 +4,6 @@
 
 /run/initialize
 
-/control/shell mkdir run/distance_table_real_geom
+/control/shell mkdir run/distance_table_real_geom_big
 /control/loop macros/run_dist_helper.mac distance 0  10 1
 /control/loop macros/run_dist_helper.mac distance 10 30 2

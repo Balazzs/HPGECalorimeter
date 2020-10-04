@@ -5,7 +5,7 @@
 /gps/ion 92 238
 /grdm/applyARM false
 
-/run/beamOn 1000000
+/run/beamOn 10000
 
 /control/shell mkdir run/distance_simdecay_real_geom/{distance}/
-/control/shell mv B4_nt_B4*.csv distance_simdecay_real_geom/{distance}/
+/control/shell mv run/B4_nt_B4*.csv run/distance_simdecay_real_geom/{distance}/
