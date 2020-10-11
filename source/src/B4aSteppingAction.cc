@@ -1,32 +1,3 @@
-//
-// ********************************************************************
-// * License and Disclaimer                                           *
-// *                                                                  *
-// * The  Geant4 software  is  copyright of the Copyright Holders  of *
-// * the Geant4 Collaboration.  It is provided  under  the terms  and *
-// * conditions of the Geant4 Software License,  included in the file *
-// * LICENSE and available at  http://cern.ch/geant4/license .  These *
-// * include a list of copyright holders.                             *
-// *                                                                  *
-// * Neither the authors of this software system, nor their employing *
-// * institutes,nor the agencies providing financial support for this *
-// * work  make  any representation or  warranty, express or implied, *
-// * regarding  this  software system or assume any liability for its *
-// * use.  Please see the license in the file  LICENSE  and URL above *
-// * for the full disclaimer and the limitation of liability.         *
-// *                                                                  *
-// * This  code  implementation is the result of  the  scientific and *
-// * technical work of the GEANT4 collaboration.                      *
-// * By using,  copying,  modifying or  distributing the software (or *
-// * any work based  on the software)  you  agree  to acknowledge its *
-// * use  in  resulting  scientific  publications,  and indicate your *
-// * acceptance of all terms of the Geant4 Software license.          *
-// ********************************************************************
-//
-// 
-/// \file B4aSteppingAction.cc
-/// \brief Implementation of the B4aSteppingAction class
-
 #include "B4aSteppingAction.hh"
 #include "B4aEventAction.hh"
 #include "B4DetectorConstruction.hh"
@@ -35,51 +6,47 @@
 #include "G4Step.hh"
 #include "G4RunManager.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-B4aSteppingAction::B4aSteppingAction(
-                      const B4DetectorConstruction* detectorConstruction,
-                      B4aEventAction* eventAction)
-  : G4UserSteppingAction(),
-    fDetConstruction(detectorConstruction),
-    fEventAction(eventAction)
+B4aSteppingAction::B4aSteppingAction(const B4DetectorConstruction* detectorConstruction_,
+                                     B4aEventAction*               eventAction_)
+  : G4UserSteppingAction  (),
+    detectorConstruction  (detectorConstruction_),
+    eventAction           (eventAction_)
 {}
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+static void LogExitMomentum (const G4Step& step, B4aEventAction& eventAction)
+{
+  auto volume = step.GetPreStepPoint()->GetTouchableHandle()->GetVolume();
+  
+  if (step.IsLastStepInVolume() && volume->GetName() == "World") {
+    if (step.GetTrack()->GetDefinition() == G4Gamma::Definition()) {
+      auto* photon = step.GetTrack()->GetDynamicParticle();
+      eventAction.SetExitDirection (photon->GetMomentumDirection());
+    }
+  }
+}
 
-B4aSteppingAction::~B4aSteppingAction()
-{}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+static G4double GetChargedStepLength (const G4Step& step)
+{
+  const bool isCharged = step.GetTrack()->GetDefinition()->GetPDGCharge() != 0.0;
+  if (isCharged) {
+    return step.GetStepLength();
+  }
+  
+  return 0;
+}
 
 void B4aSteppingAction::UserSteppingAction(const G4Step* step)
 {
-// Collect energy and track length step by step
-
-  // get volume of the current step
-  auto volume = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
+  auto volume        = step->GetPreStepPoint()->GetTouchableHandle()->GetVolume();
+  auto energyDeposit = step->GetTotalEnergyDeposit();
+  auto stepLength    = GetChargedStepLength(*step);
   
-  // energy deposit
-  auto edep = step->GetTotalEnergyDeposit();
-  //G4cout << edep << G4endl;
-  
-  // step length
-  G4double stepLength = 0.;
-  if ( step->GetTrack()->GetDefinition()->GetPDGCharge() != 0. ) {
-    stepLength = step->GetStepLength();
+  const bool isInAbsorberVolume = volume == detectorConstruction->GetAbsorberPV();
+  if (isInAbsorberVolume) {
+    eventAction->AddAbs(energyDeposit, stepLength);
   }
   
-  if ( volume == fDetConstruction->GetAbsorberPV() ) {
-    fEventAction->AddAbs(edep, stepLength);
-  }
-  
-  if (step->IsLastStepInVolume() && volume->GetName() == "World") {
-    if (step->GetTrack()->GetDefinition() == G4Gamma::Definition()) {
-      auto* photon = step->GetTrack()->GetDynamicParticle();
-      fEventAction->SetExitDirection (photon->GetMomentumDirection());
-    }
-  }
-  
+  LogExitMomentum (*step, *eventAction);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
