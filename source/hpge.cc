@@ -1,32 +1,3 @@
-//
-// ********************************************************************
-// * License and Disclaimer                                           *
-// *                                                                  *
-// * The  Geant4 software  is  copyright of the Copyright Holders  of *
-// * the Geant4 Collaboration.  It is provided  under  the terms  and *
-// * conditions of the Geant4 Software License,  included in the file *
-// * LICENSE and available at  http://cern.ch/geant4/license .  These *
-// * include a list of copyright holders.                             *
-// *                                                                  *
-// * Neither the authors of this software system, nor their employing *
-// * institutes,nor the agencies providing financial support for this *
-// * work  make  any representation or  warranty, express or implied, *
-// * regarding  this  software system or assume any liability for its *
-// * use.  Please see the license in the file  LICENSE  and URL above *
-// * for the full disclaimer and the limitation of liability.         *
-// *                                                                  *
-// * This  code  implementation is the result of  the  scientific and *
-// * technical work of the GEANT4 collaboration.                      *
-// * By using,  copying,  modifying or  distributing the software (or *
-// * any work based  on the software)  you  agree  to acknowledge its *
-// * use  in  resulting  scientific  publications,  and indicate your *
-// * acceptance of all terms of the Geant4 Software license.          *
-// ********************************************************************
-//
-//
-/// \file exampleB4a.cc
-/// \brief Main program of the B4a example
-
 #include "B4DetectorConstruction.hh"
 #include "B4aActionInitialization.hh"
 
@@ -38,10 +9,8 @@
 
 #include "G4UImanager.hh"
 #include "G4UIcommand.hh"
-#include "QBBC.hh"
-#include "QGSP_BERT.hh"
-#include "G4EmLivermorePhysics.hh"
 #include "G4EmPenelopePhysics.hh"
+#include "G4VModularPhysicsList.hh"
 
 #include "G4RadioactiveDecayPhysics.hh"
 
@@ -61,12 +30,10 @@
 
 #define U_238_DECAY_SIMULATION
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
 namespace {
   void PrintUsage() {
     G4cerr << " Usage: " << G4endl;
-    G4cerr << " exampleB4a [-m macro ] [-u UIsession] [-t nThreads]" << G4endl;
+    G4cerr << " hpge [-m macro ] [-u UIsession] [-t nThreads]" << G4endl;
     G4cerr << "   note: -t option is available only for multi-threaded mode."
            << G4endl;
   }
@@ -98,8 +65,6 @@ public:
 };
 
 
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 int main(int argc,char** argv)
 {
@@ -135,10 +100,6 @@ int main(int argc,char** argv)
   if ( ! macro.size() ) {
     ui = new G4UIExecutive(argc, argv, session);
   }
-
-  // Optionally: choose a different Random engine...
-  //
-  // G4Random::setTheEngine(new CLHEP::MTwistEngine);
   
   // Construct the default run manager
   //
@@ -159,15 +120,10 @@ int main(int argc,char** argv)
   G4VModularPhysicsList* physicsList = new G4VModularPhysicsList ();
   physicsList->RegisterPhysics(new G4EmPenelopePhysics);
   
-  /*G4VModularPhysicsList* physicsList = new G4VModularPhysicsList ();
-  physicsList->RegisterPhysics(new G4EmLivermorePhysics);*/
-  
   #ifdef U_238_DECAY_SIMULATION
   physicsList->RegisterPhysics(new G4RadioactiveDecayPhysics);
   physicsList->RegisterPhysics(new MyParticleConstructor);
   #endif
-  
-  //G4VModularPhysicsList* physicsList = new QBBC();
   
   physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
@@ -177,11 +133,9 @@ int main(int argc,char** argv)
   
   // Initialize visualization
   //
-  auto visManager = new G4VisExecutive;
-  // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
-  // G4VisManager* visManager = new G4VisExecutive("Quiet");
-  visManager->Initialize();
-
+  G4VisExecutive visManager;
+  visManager.Initialize();
+  
   // Get the pointer to the User Interface manager
   auto UImanager = G4UImanager::GetUIpointer();
 
@@ -202,13 +156,5 @@ int main(int argc,char** argv)
     delete ui;
   }
 
-  // Job termination
-  // Free the store: user actions, physics_list and detector_description are
-  // owned and deleted by the run manager, so they should not be deleted 
-  // in the main() program !
-
-  delete visManager;
   delete runManager;
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo.....
