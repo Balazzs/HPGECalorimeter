@@ -92,7 +92,7 @@ int main(int argc,char** argv)
       PrintUsage();
       return 1;
     }
-  }  
+  }
   
   // Detect interactive mode (if no macro provided) and define UI session
   //
@@ -100,6 +100,8 @@ int main(int argc,char** argv)
   if ( ! macro.size() ) {
     ui = new G4UIExecutive(argc, argv, session);
   }
+  
+  DataLogger logger;
   
   // Construct the default run manager
   //
@@ -111,12 +113,12 @@ int main(int argc,char** argv)
 #else
   auto runManager = new G4RunManager;
 #endif
-
+  
   // Set mandatory initialization classes
   //
   auto detConstruction = new B4DetectorConstruction();
   runManager->SetUserInitialization(detConstruction);
-
+  
   G4VModularPhysicsList* physicsList = new G4VModularPhysicsList ();
   physicsList->RegisterPhysics(new G4EmPenelopePhysics);
   
@@ -128,7 +130,7 @@ int main(int argc,char** argv)
   physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
   
-  auto actionInitialization = new B4aActionInitialization(detConstruction);
+  auto actionInitialization = new B4aActionInitialization(detConstruction, logger);
   runManager->SetUserInitialization(actionInitialization);
   
   // Initialize visualization

@@ -33,28 +33,22 @@
 #include "B4aEventAction.hh"
 #include "B4aSteppingAction.hh"
 #include "B4DetectorConstruction.hh"
+#include "PhotonLoggingStackingAction.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-B4aActionInitialization::B4aActionInitialization
-                            (B4DetectorConstruction* detConstruction)
- : G4VUserActionInitialization(),
-   fDetConstruction(detConstruction)
+B4aActionInitialization::B4aActionInitialization (B4DetectorConstruction*  detConstruction,
+                                                  DataLogger&              logger) :
+  G4VUserActionInitialization   ( ),
+  fDetConstruction              (detConstruction),
+  dataLogger                    (logger)
 {}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 B4aActionInitialization::~B4aActionInitialization()
 {}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void B4aActionInitialization::BuildForMaster() const
 {
   SetUserAction(new B4RunAction);
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void B4aActionInitialization::Build() const
 {
@@ -63,6 +57,5 @@ void B4aActionInitialization::Build() const
   auto eventAction = new B4aEventAction;
   SetUserAction(eventAction);
   SetUserAction(new B4aSteppingAction(fDetConstruction,eventAction));
+  SetUserAction(new PhotonLoggingStackingAction (dataLogger));
 }  
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
