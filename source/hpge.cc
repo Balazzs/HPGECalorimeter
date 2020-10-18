@@ -153,6 +153,10 @@ int main(int argc,char** argv)
 {
   Settings settings = GetSettingsFromCommandLineArguments (argc, argv);
   
+  if (!settings.valid) {
+    return 1;
+  }
+  
   auto ui = SetupInteractiveMode (settings, argc, argv);
   auto runManager = GetRunManager(settings);
   
