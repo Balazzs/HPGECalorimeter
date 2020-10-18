@@ -50,6 +50,7 @@ G4VPhysicalVolume* ConstructDetectorGeometry (DetectorGeometryType  type,
       break;
     case DetectorGeometryType::Simple:
       DefineSimpleVolumes (worldLV, absorberPV, fCheckOverlaps);
+      break;
     case DetectorGeometryType::Real:
     default:
       DefineVolumes (worldLV, absorberPV, fCheckOverlaps);
