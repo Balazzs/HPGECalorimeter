@@ -15,7 +15,7 @@ B4DetectorConstruction::B4DetectorConstruction(G4double sampleDistance_, G4bool 
 G4VPhysicalVolume* B4DetectorConstruction::Construct()
 {
   DefineMaterials ();
-  return ConstructDetectorGeometry (DetectorGeometryType::Empty, absorberPV, fCheckOverlaps, constructSampleHolder, sampleDistance);
+  return ConstructDetectorGeometry (DetectorGeometryType::Real, absorberPV, fCheckOverlaps, constructSampleHolder, sampleDistance);
 }
 
 void B4DetectorConstruction::DefineMaterials()
