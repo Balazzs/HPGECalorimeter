@@ -27,17 +27,9 @@
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
 
+#include <memory>
 
 #define U_238_DECAY_SIMULATION
-
-namespace {
-  void PrintUsage() {
-    G4cerr << " Usage: " << G4endl;
-    G4cerr << " hpge [-m macro ] [-u UIsession] [-t nThreads]" << G4endl;
-    G4cerr << "   note: -t option is available only for multi-threaded mode."
-           << G4endl;
-  }
-}
 
 class MyParticleConstructor : public G4VPhysicsConstructor{
 public:
@@ -64,56 +56,104 @@ public:
   } 
 };
 
-
-
-int main(int argc,char** argv)
-{
-  // Evaluate arguments
-  //
-  if ( argc > 7 ) {
-    PrintUsage();
-    return 1;
-  }
+struct Settings {
+  bool valid = true;
   
   G4String macro;
   G4String session;
-#ifdef G4MULTITHREADED
-  G4int nThreads = 0;
-#endif
+  G4int    nThreads = 0;
+  
+  G4double sampleDistance = 5;
+};
+
+void PrintUsage() {
+  G4cerr << " Usage: " << G4endl;
+  G4cerr << " hpge [-m macro ] [-u UIsession] [-t nThreads]" << G4endl;
+  G4cerr << "   note: -t option is available only for multi-threaded mode."
+          << G4endl;
+}
+
+Settings GetSettingsFromCommandLineArguments (int argc,char** argv)
+{
+  Settings settings;
+  
+  if ( argc > 7 ) {
+    PrintUsage();
+    settings.valid = false;
+    return settings;
+  }
+  
   for ( G4int i=1; i<argc; i=i+2 ) {
-    if      ( G4String(argv[i]) == "-m" ) macro = argv[i+1];
-    else if ( G4String(argv[i]) == "-u" ) session = argv[i+1];
+    if      ( G4String(argv[i]) == "-m" ) settings.macro   = argv[i+1];
+    else if ( G4String(argv[i]) == "-u" ) settings.session = argv[i+1];
 #ifdef G4MULTITHREADED
-    else if ( G4String(argv[i]) == "-t" ) {
-      nThreads = G4UIcommand::ConvertToInt(argv[i+1]);
-    }
+    else if ( G4String(argv[i]) == "-t" ) settings.nThreads = G4UIcommand::ConvertToInt(argv[i+1]);
 #endif
     else {
       PrintUsage();
-      return 1;
+      settings.valid = false;
+      return settings;
     }
   }
   
-  // Detect interactive mode (if no macro provided) and define UI session
-  //
-  G4UIExecutive* ui = nullptr;
-  if ( ! macro.size() ) {
-    ui = new G4UIExecutive(argc, argv, session);
-  }
-  
-  DataLogger logger;
-  
+  return settings;
+}
+
+std::unique_ptr<G4RunManager> GetRunManager (const Settings& settings)
+{
   // Construct the default run manager
   //
 #ifdef G4MULTITHREADED
   auto runManager = new G4MTRunManager;
-  if ( nThreads > 0 ) { 
-    runManager->SetNumberOfThreads(nThreads);
-  }  
+  if ( settings.nThreads > 0 ) { 
+    runManager->SetNumberOfThreads(settings.nThreads);
+  } 
+  return std::unique_ptr<G4RunManager> (runManager);
 #else
-  auto runManager = new G4RunManager;
+  return std::unique_ptr<G4RunManager> (new G4RunManager);
 #endif
+}
+
+std::unique_ptr<G4UIExecutive> SetupInteractiveMode (const Settings& settings, int argc,char** argv)
+{
+  if ( ! settings.macro.size() ) {
+    return std::make_unique<G4UIExecutive> (argc, argv, settings.session);
+  } else {
+    return nullptr;
+  }
+}
+
+void StartUIOrProcessMacro (G4UIExecutive* ui, const Settings& settings)
+{
+  // Get the pointer to the User Interface manager
+  auto UImanager = G4UImanager::GetUIpointer();
+
+  // Process macro or start UI session
+  //
+  if ( settings.macro.size() ) {
+    // batch mode
+    G4String command = "/control/execute ";
+    UImanager->ApplyCommand(command+settings.macro);
+  }
+  else  {  
+    // interactive mode : define UI session
+    UImanager->ApplyCommand("/control/execute init_vis.mac");
+    if (ui->IsGUI()) {
+      UImanager->ApplyCommand("/control/execute gui.mac");
+    }
+    ui->SessionStart();
+    delete ui;
+  }
+}
+
+int main(int argc,char** argv)
+{
+  Settings settings = GetSettingsFromCommandLineArguments (argc, argv);
   
+  auto ui = SetupInteractiveMode (settings, argc, argv);
+  auto runManager = GetRunManager(settings);
+  
+  DataLogger logger;
   // Set mandatory initialization classes
   //
   auto detConstruction = new B4DetectorConstruction();
@@ -138,25 +178,5 @@ int main(int argc,char** argv)
   G4VisExecutive visManager;
   visManager.Initialize();
   
-  // Get the pointer to the User Interface manager
-  auto UImanager = G4UImanager::GetUIpointer();
-
-  // Process macro or start UI session
-  //
-  if ( macro.size() ) {
-    // batch mode
-    G4String command = "/control/execute ";
-    UImanager->ApplyCommand(command+macro);
-  }
-  else  {  
-    // interactive mode : define UI session
-    UImanager->ApplyCommand("/control/execute init_vis.mac");
-    if (ui->IsGUI()) {
-      UImanager->ApplyCommand("/control/execute gui.mac");
-    }
-    ui->SessionStart();
-    delete ui;
-  }
-
-  delete runManager;
+  StartUIOrProcessMacro (ui.get (), settings);
 }
