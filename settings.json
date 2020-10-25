@@ -1,0 +1,9 @@
+{
+	"version" 				: 0,
+	"macro"					: "",
+	"number of threads"		: 8,
+	"sample distance"		: 5,
+	"sample holder"			: true,
+	"primary energy type"	: "Simdecay",
+	"geometry type"			: "Real"
+}
