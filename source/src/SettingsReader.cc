@@ -108,5 +108,19 @@ Settings ReadSettings (int argc, char** argv)
 		settings.constructSampleHolder = j["sample holder"].get<bool> ();
 	}
 	
+	if (j.contains("primary energy type") && j["primary energy type"].is_string()) {
+		std::string text = j["primary energy type"].get<std::string> ();
+		if (text == "Mono") {
+			settings.primaryEnergyMode = PrimaryEnergyMode::Mono;
+		} else if (text == "Table") {
+			settings.primaryEnergyMode = PrimaryEnergyMode::Table;
+		} else if (text == "Simdecay") {
+			settings.primaryEnergyMode = PrimaryEnergyMode::Simdecay;
+		} else {
+			G4cerr << "Invalid JSON file - incorrect primary energy mode" << G4endl;
+			settings.valid = false;
+		}
+	}
+	
 	return settings;
 }

@@ -30,8 +30,6 @@
 
 #include <memory>
 
-#define U_238_DECAY_SIMULATION
-
 class MyParticleConstructor : public G4VPhysicsConstructor{
 public:
   MyParticleConstructor () :
@@ -125,15 +123,16 @@ int main(int argc,char** argv)
   G4VModularPhysicsList* physicsList = new G4VModularPhysicsList ();
   physicsList->RegisterPhysics(new G4EmPenelopePhysics);
   
-  #ifdef U_238_DECAY_SIMULATION
-  physicsList->RegisterPhysics(new G4RadioactiveDecayPhysics);
-  physicsList->RegisterPhysics(new MyParticleConstructor);
-  #endif
+  if (settings.primaryEnergyMode == PrimaryEnergyMode::Simdecay)
+  {
+    physicsList->RegisterPhysics(new G4RadioactiveDecayPhysics);
+    physicsList->RegisterPhysics(new MyParticleConstructor);
+  }
   
   physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
   
-  auto actionInitialization = new B4aActionInitialization(detConstruction, logger);
+  auto actionInitialization = new B4aActionInitialization(*detConstruction, settings, logger);
   runManager->SetUserInitialization(actionInitialization);
   
   // Initialize visualization

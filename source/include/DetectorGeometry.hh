@@ -1,11 +1,6 @@
 #include "G4VPhysicalVolume.hh"
 #include "G4SystemOfUnits.hh"
-
-enum class DetectorGeometryType {
-  Empty,
-  Simple,
-  Real
-};
+#include "SettingsReader.hh"
 
 G4VPhysicalVolume* ConstructDetectorGeometry (DetectorGeometryType  type,
                                               G4VPhysicalVolume*&   absorberPV,//TODO ugly
