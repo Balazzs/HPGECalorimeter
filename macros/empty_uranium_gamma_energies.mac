@@ -1,0 +1,17 @@
+/run/numberOfThreads 1
+
+/cuts/setLowEdge 250 eV
+
+/run/initialize
+
+/gps/ang/type iso
+/gps/position 0 0 0 cm
+/gps/energy 0 eV
+/gps/particle ion
+/gps/ion 92 238
+/grdm/applyARM false
+
+/run/beamOn 100000
+
+/control/shell mkdir run/empty_uranium_gamma_energies/
+/control/shell mv run/B4_nt_B4*.csv run/empty_uranium_gamma_energies/
