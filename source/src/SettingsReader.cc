@@ -122,5 +122,19 @@ Settings ReadSettings (int argc, char** argv)
 		}
 	}
 	
+	if (j.contains("geometry type") && j["geometry type"].is_string ()) {
+		std::string text = j["geometry type"].get<std::string> ();
+		if (text == "Empty") {
+			settings.detectorGeometry = DetectorGeometryType::Empty;
+		} else if (text == "Simple") {
+			settings.detectorGeometry = DetectorGeometryType::Simple;
+		} else if (text == "Real") {
+			settings.detectorGeometry = DetectorGeometryType::Real;
+		} else {
+			G4cerr << "Invalid JSON file - incorrect detector geometry type" << G4endl;
+			settings.valid = false;
+		}
+	}
+	
 	return settings;
 }

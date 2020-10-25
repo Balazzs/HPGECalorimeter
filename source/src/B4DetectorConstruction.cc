@@ -3,8 +3,11 @@
 #include "G4NistManager.hh"
 #include "G4PhysicalConstants.hh"
 
-B4DetectorConstruction::B4DetectorConstruction(G4double sampleDistance_, G4bool constructSampleHolder_)
+B4DetectorConstruction::B4DetectorConstruction(DetectorGeometryType   detectorGeometryType,
+                                               G4double               sampleDistance_,
+                                               G4bool                 constructSampleHolder_)
  : G4VUserDetectorConstruction(),
+   geometryType           (detectorGeometryType),
    sampleDistance         (sampleDistance_),
    constructSampleHolder  (constructSampleHolder_),
    absorberPV             (nullptr),
@@ -15,7 +18,7 @@ B4DetectorConstruction::B4DetectorConstruction(G4double sampleDistance_, G4bool 
 G4VPhysicalVolume* B4DetectorConstruction::Construct()
 {
   DefineMaterials ();
-  return ConstructDetectorGeometry (DetectorGeometryType::Real, absorberPV, fCheckOverlaps, constructSampleHolder, sampleDistance);
+  return ConstructDetectorGeometry (geometryType, absorberPV, fCheckOverlaps, constructSampleHolder, sampleDistance);
 }
 
 void B4DetectorConstruction::DefineMaterials()
