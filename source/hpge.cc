@@ -119,7 +119,7 @@ int main(int argc,char** argv)
   DataLogger logger;
   // Set mandatory initialization classes
   //
-  auto detConstruction = new B4DetectorConstruction(settings.sampleDistance, settings.constructSampleHolder);
+  auto detConstruction = new B4DetectorConstruction(settings.sampleDistance *cm, settings.constructSampleHolder);
   runManager->SetUserInitialization(detConstruction);
   
   G4VModularPhysicsList* physicsList = new G4VModularPhysicsList ();
