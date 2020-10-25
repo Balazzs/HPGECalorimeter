@@ -8,7 +8,7 @@ using namespace nlohmann;
 
 static void PrintUsage() {
   G4cerr << " Usage: " << G4endl;
-  G4cerr << " hpge [-m macro ] [-u UIsession] [-t nThreads] [-d sample distance in cm]" << G4endl;
+  G4cerr << " hpge [-m macro ] [-u UIsession] [-t nThreads]" << G4endl;
   G4cerr << "   note: -t option is available only for multi-threaded mode." << G4endl;
 }
 
