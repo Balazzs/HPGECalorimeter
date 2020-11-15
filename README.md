@@ -2,7 +2,15 @@ TODO TOC
 
 - [Description](#Description)
 - [Building](#Building)
-  + [Geant4 installation](#Geant4 installation)
+  * [Geant4 installation](#Geant4-installation)
+    + [Windows Subsystem for Linux (WSL)](#Windows-Subsystem-for-Linux-(WSL))
+    + [Installation on Linux](#Installation-on-Linux)
+        * [Downloading the source](#Downloading-the-source)
+        * [Getting build tools and prerequisites](#Getting-build-tools-and-prerequisites)
+        * [Building](#Building)
+  *  [Building the code](#Building-the-code)
+    + [Getting the code](#Getting-the-code)
+    + [Building with CMAKE](#Building-with-CMAKE)
 
 # Description
 My MSc Thesis at Eötvös Lóránd University (started as a project for Modelling Laboratory)
@@ -58,7 +66,7 @@ You now have a working a Linux installation inside your Windows system, follow t
 
 Just stick to the official Geant4 getting started guide: https://geant4.web.cern.ch/support/getting_started
 
-#### Download the source
+#### Downloading the source
 
 Download the source code (I used the latest release link from the github repo releases, **this will get outdated**, download it manually, or update the link):
 
@@ -66,7 +74,7 @@ Download the source code (I used the latest release link from the github repo re
 
 `tar -xvf v10.6.3.tar.gz`
 
-#### Get build tools and prerequisites
+#### Getting build tools and prerequisites
 Get the necessary tools for the build:
 
 `sudo apt-get update`
@@ -81,7 +89,7 @@ If you wish to use the graphical interface **- NOT TESTED YET (i did this a long
 
 `sudo apt-get -y install qt5-default`
 
-#### Build
+#### Building
 
 Create a folder for your build next to your unpacked source folder.
 
