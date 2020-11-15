@@ -1,9 +1,12 @@
-# HPGECalorimeter
-Project for Modelling Laboratory at ELTE
-
 TODO TOC
 
-## Installation on Windows
+# Description
+My MSc Thesis at Eötvös Lóránd University (started as a project for Modelling Laboratory)
+
+# Building
+## Geant4 installation
+
+To run the simulation you need the Geant4 framework. If you do not have it, then here is a short installation guide. (Although please refer to the official guides for detailed steps and more up-to-date information)
 
 ### Windows Subsystem for Linux (WSL)
 
@@ -43,9 +46,7 @@ First time you start your subsystem you will be asked for a username and passwor
 
 You now have a working a Linux installation inside your Windows system, follow the linux guide from now on (inside Ubuntu console).
 
-## Installation on Linux
-
-### Installing Geant4
+### Installation on Linux
 
 Just stick to the official Geant4 getting started guide: https://geant4.web.cern.ch/support/getting_started
 
@@ -102,16 +103,12 @@ And install (sudo only needed if you installed into a directory not owned by you
 
 `sudo make install`
 
----
+## Building the code
 
 
-description coming soon...
+# Running simulations
 
-----
-
-build and run info coming soon...
-
-----
+# Analysis notebook
 
 some parts of the analysis notebook might be outdated, there is already an issue for updating it
 
