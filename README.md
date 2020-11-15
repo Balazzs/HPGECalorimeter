@@ -109,8 +109,44 @@ And install (sudo only needed if you installed into a directory not owned by you
 
 ## Building the code
 
+### Getting the code
+
+Either you already have it downloaded or just clone it from git.
+
+> You need git
+> `sudo apt-get install git`
+
+`git clone https://github.com/Balazzs/HPGECalorimeter`
+
+`cd HPGECalorimeter`
+
+### Building with CMAKE
+
+`mkdir build`
+
+`cd build`
+
+Set CMAKE_INSTALL_PREFIX and the source directory to your own paths, in my case:
+
+`cmake -DCMAKE_INSTALL_PREFIX=/home/balazzs/HPGECalorimeter/ /home/balazzs/HPGECalorimeter/source`
+
+Build the project.
+
+`make -j8`
+
+Install the hpge binary (or just copy it to the HPGECalorimeter folder)
+
+`make install`
 
 # Running simulations
+
+To run the simulation you just have to source the geant4.sh file and run the executable. This is done by the run.sh script (assuming your geant install prefix was /usr/local)
+
+`./run.sh`
+
+## Parameter configuration
+
+
 
 # Analysis notebook
 
