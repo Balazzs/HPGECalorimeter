@@ -77,4 +77,4 @@ endforeach()
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS hpge DESTINATION bin)
+install(TARGETS hpge DESTINATION ${CMAKE_INSTALL_PREFIX}/)
