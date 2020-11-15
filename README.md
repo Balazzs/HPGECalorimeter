@@ -1,6 +1,8 @@
 TODO TOC
 
-[Description](#Description)
+- [Description](#Description)
+- [Building](#Building)
+  + [Geant4 installation](#Geant4 installation)
 
 # Description
 My MSc Thesis at Eötvös Lóránd University (started as a project for Modelling Laboratory)
