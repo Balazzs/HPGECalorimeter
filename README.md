@@ -105,6 +105,7 @@ Create a folder for your build next to your unpacked source folder.
 - Use Qt (only if you want GUI with QT)
 - If you set the prerequisites up then use the system versions
 - Anything other you want...
+
 `cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DGEANT4_INSTALL_DATA=ON -DGEANT4_BUILD_MULTITHREADED=ON -DGEANT4_USE_GDML=ON -DGEANT4_USE_QT=ON -DGEANT4_USE_SYSTEM_CLHEP=ON -DGEANT4_USE_SYSTEM_EXPAT=ON -DGEANT4_USE_SYSTEM_ZLIB=ON /path/to/geant4-source`
 
 In my case:
