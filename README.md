@@ -10,7 +10,9 @@ To run the simulation you need the Geant4 framework. If you do not have it, then
 
 ### Windows Subsystem for Linux (WSL)
 
-I suggest using WSL for a Windows installation, as the native windows Geant4 doesn't support multithread simulations.
+I suggest using WSL for a Windows installation, as the native windows Geant4 doesn't support multithread simulations, and configuring Qt for GUI can become a nightmare sometimes. If you still want to use the native Windows solution then please refer to the official Geant4 [installation guide](http://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/InstallationGuide/html/)
+
+
 WSL is a real Linux system running under windows (now with WSL 2.0 with GUI included, although you will need an X server and further configurations, I will only install one without GUI), all the advantages of having Linux and Windows without the hassle of dual booting.
 
 Microsoft tutorial: https://docs.microsoft.com/en-us/windows/wsl/install-win10 
@@ -45,6 +47,8 @@ First time you start your subsystem you will be asked for a username and passwor
 > If you want to use graphical interfaces too you will need an X server for you windows and a window manager for your Linux subsystem, there are some tutorials about this around the internet
 
 You now have a working a Linux installation inside your Windows system, follow the linux guide from now on (inside Ubuntu console).
+
+---
 
 ### Installation on Linux
 
