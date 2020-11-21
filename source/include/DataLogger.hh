@@ -8,5 +8,5 @@ public:
 	void LogEventEnd ();
 	
 private:
-	std::ofstream photonFile = std::ofstream ("photonEnergies.txt");
+	std::ofstream photonFile = std::ofstream ("run/photonEnergies.txt");
 };

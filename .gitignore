@@ -4,8 +4,7 @@ build/CMakeFiles/*
 build/.ipynb_checkpoints/*
 build/*.svg
 build/*.png
-build/G4History.macro
-build/exampleB4a
+G4History.macro
 .ipynb_checkpoints/*
 build/hpge
 hpge
