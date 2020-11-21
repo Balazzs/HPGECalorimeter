@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 from sys import argv
-from os  import path
+from os  import path, system
 from git import Repo
 from datetime import datetime
 from time import sleep
@@ -40,8 +40,9 @@ def move_run_data_to_runs_folder (repo):
     timestamp = datetime.now().strftime("%Y_%m_%d-%H_%M_%S")
     run_directory = "runs/%s/" % timestamp
 
-    os.system("mv run/* %s" % run_directory)
-    os.system("cp settings.json %s" % run_directory)
+    system("mkdir %s" % run_directory)
+    system("mv run/* %s" % run_directory)
+    system("cp settings.json %s" % run_directory)
 
     update_settings_file_with_sha (run_directory, repo)
 
