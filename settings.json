@@ -1,7 +1,7 @@
 {
 	"version" 				: 0,
 	"macro"					: "",
-	"number of threads"		: 8,
+	"number of threads"		: 16,
 	"sample distance"		: 5,
 	"sample holder"			: true,
 	"primary energy type"	: "Simdecay",
