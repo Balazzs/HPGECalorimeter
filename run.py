@@ -5,6 +5,7 @@ from os  import path
 from git import Repo
 from datetime import datetime
 import json
+import subprocess
 
 def update_settings_file_with_sha (run_directory, repo):
     settings_path = path.join(run_directory, "settings.json")
