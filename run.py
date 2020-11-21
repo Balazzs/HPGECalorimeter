@@ -20,8 +20,7 @@ def update_settings_file_with_sha (run_directory, repo):
         json.dump(settings, settings_file)
 
 def log_process_output_until_it_ends (process):
-    while True:
-        output = process.stdout.readline()
+    for output in process.stdout:
         print(output.strip())
         # Do something else
         return_code = process.poll()
@@ -34,7 +33,6 @@ def log_process_output_until_it_ends (process):
             print('RETURN CODE', return_code)
 
             break
-        sleep(0.01)
 
 def move_run_data_to_runs_folder (repo):
     timestamp = datetime.now().strftime("%Y_%m_%d-%H_%M_%S")
@@ -62,7 +60,7 @@ if repo.is_dirty() and not allow_dirty_repo:
     print ("You have uncommited changes in the git repo. Please commit before running a simulation. (For reproducibility)")
     exit ()
 
-process = subprocess.Popen(['bash', 'run.sh'], stdout=subprocess.PIPE)
+process = subprocess.Popen(['bash', 'run.sh'], stdout=subprocess.PIPE, text=True)
 
 log_process_output_until_it_ends (process)
 
