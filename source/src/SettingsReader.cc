@@ -27,15 +27,6 @@ json ReadJSONFile ()
 	
 	settingsFile >> j;
 	
-	if (j.contains("version") && j["version"].is_number_integer()) {
-		if (j["version"].get<int> () > version) {
-			G4cerr << "Settings file version newer then program version" << G4endl;
-		}
-	} else {
-		G4cerr << "Invalid JSON file - no file version" << G4endl;
-		return json (nullptr);
-	}
-	
 	return j;
 }
 
