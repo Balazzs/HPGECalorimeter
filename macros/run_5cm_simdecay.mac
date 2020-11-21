@@ -1,4 +1,4 @@
-/run/numberOfThreads 8
+/run/numberOfThreads 16
 
 /cuts/setLowEdge 250 eV
 
@@ -12,7 +12,7 @@
 /grdm/applyARM false
 
 
-/run/beamOn 1000000
+/run/beamOn 10000
 
 /control/shell mkdir run/simdecay_real_geom_5cm_point_source
 /control/shell mv run/B4_nt_B4*.csv run/simdecay_real_geom_5cm_point_source

@@ -1,6 +1,5 @@
 {
-	"version" 				: 0,
-	"macro"					: "",
+	"macro"					: "run_5cm_simdecay.mac",
 	"number of threads"		: 16,
 	"sample distance"		: 5,
 	"sample holder"			: true,
