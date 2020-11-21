@@ -56,25 +56,6 @@ add_executable(hpge hpge.cc ${sources} ${headers})
 target_link_libraries(hpge PUBLIC ${Geant4_LIBRARIES} PRIVATE nlohmann_json::nlohmann_json)
 
 #----------------------------------------------------------------------------
-# Copy all scripts to the build directory, i.e. the directory in which we
-# build B4a. This is so that we can run the executable directly because it
-# relies on these scripts being in the current working directory.
-#
-set(EXAMPLEB4A_SCRIPTS
-  gui.mac
-  init_vis.mac
-  vis.mac
-  )
-
-foreach(_script ${EXAMPLEB4A_SCRIPTS})
-  configure_file(
-    ${PROJECT_SOURCE_DIR}/${_script}
-    ${PROJECT_BINARY_DIR}/${_script}
-    COPYONLY
-    )
-endforeach()
-
-#----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS hpge DESTINATION ${CMAKE_INSTALL_PREFIX}/)

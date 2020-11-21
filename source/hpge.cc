@@ -84,19 +84,19 @@ void StartUIOrProcessMacro (G4UIExecutive* ui, const Settings& settings)
 {
   // Get the pointer to the User Interface manager
   auto UImanager = G4UImanager::GetUIpointer();
-
+  
   // Process macro or start UI session
   //
   if ( settings.macro.size() ) {
     // batch mode
     G4String command = "/control/execute ";
-    UImanager->ApplyCommand(command+settings.macro);
+    UImanager->ApplyCommand(command + "macros/" + settings.macro);
   }
-  else  {  
+  else  {
     // interactive mode : define UI session
-    UImanager->ApplyCommand("/control/execute init_vis.mac");
+    UImanager->ApplyCommand("/control/execute macros/vis/init_vis.mac");
     if (ui->IsGUI()) {
-      UImanager->ApplyCommand("/control/execute gui.mac");
+      UImanager->ApplyCommand("/control/execute macros/vis/gui.mac");
     }
     ui->SessionStart();
     delete ui;
