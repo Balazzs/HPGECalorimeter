@@ -10,3 +10,4 @@ build/hpge
 hpge
 run/**
 runs/**
+.vscode/settings.json
