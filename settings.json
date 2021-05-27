@@ -1,8 +1,8 @@
 {
-	"macro"					: "run_5cm_simdecay.mac",
+	"macro"					: "run_mono_energies over_distances.mac",
 	"number of threads"		: 16,
-	"sample distance"		: 5,
-	"sample holder"			: true,
-	"primary energy type"	: "Simdecay",
+	"sample distance"		: 0.2,
+	"sample holder"			: false,
+	"primary energy type"	: "Mono",
 	"geometry type"			: "Real"
 }

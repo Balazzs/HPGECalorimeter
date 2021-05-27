@@ -1,0 +1,2 @@
+/control/shell mkdir mono_real_geom__distance_energy/{distance}
+/control/foreach macros/run_mono_helper.mac energy "25 40 60 100 150 250 400 600 1000 1500 2500 4000 6000 10000 15000 25000"
