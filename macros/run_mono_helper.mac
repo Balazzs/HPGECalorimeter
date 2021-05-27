@@ -6,5 +6,5 @@
 
 /run/beamOn 1000000
 
-/control/shell mkdir mono_real_geom_distance_energy/{distance}/{energy}/
-/control/shell mv B4_nt_B4*.csv mono_real_geom_distance_energy/{distance}/{energy}/
+/control/shell mkdir run/mono_real_geom_distance_energy/{distance}/{energy}/
+/control/shell mv run/B4_nt_B4*.csv run/mono_real_geom_distance_energy/{distance}/{energy}/
