@@ -6,4 +6,4 @@
 
 
 /control/shell mkdir run/mono_real_geom_distance_energy
-/control/foreach macros/run_mono_energies.mac distance "1 1.25 1.5 1.75 2 2.25 2.5 2.75 3 3.5 4 4.5 5 6 7 8 9 10"
+/control/foreach macros/run_mono_energies.mac distance "1 3 5 10 15 20 30 40 50 60 80 100"
