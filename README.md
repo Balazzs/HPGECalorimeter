@@ -1,5 +1,3 @@
-TODO TOC
-
 - [Description](#Description)
 - [Building](#Building)
   * [Geant4 installation](#Geant4-installation)
@@ -170,7 +168,59 @@ If you want to run without GUI then set settings.json:
 |	"primary energy type"	|                Mono, table or simdecay                                                    |               "Mono"                   |
 |	"geometry type"	     	|    Empty (for primary gamma counting), simple, real                                       |               "Real"                   |
 
-# Analysis notebook
+# Notebook
 
-some parts of the analysis notebook might be outdated, there is already an issue for updating it
+There are 4 notebooks in the repo
 
+## Analysis.ipynb
+
+> *some early parts of the analysis notebook might be outdated, there is an issue for updating it but I probably will never get there, but the way calculations were done is clearly visible and with small amount of work (changing file path, rerunning a small simulation with an existing macro, etc.) reproducible.*
+
+The first notebook where initial analysis was done, this was started for my Modelling Lab course but then continued and updated later, many simulation rerun, etc. It contains a lot, like:
+
+- Helper function for file loading, efficiency calculation, plotting, etc.
+- Analysis of simple first spectrums with mainly cube and old geoemtries and a simple particle gun (Z direction momentum)
+-> Old geometry
+- Investigation of physics change
+- Exit angle analysis
+-> Point source
+- Simple distance dependence
+- Various 238U decay simulations with RadioActiveDecayProcess and single gamma table simulation
+-> Realistic geometry created
+- Effect of realistic geometry on simulations (charged particle absorption on endcap, backscatter peak, etc.)
+- Efficiency investigations, energy dependent efficiency, power law and 5th order fit
+- 3D source
+- Sample self-absorption simulation
+- A better distance dependent efficiency simulation (still not the one used in my Thesis) (for 238U decay)
+- RadioActiveDecay vs table generation primary energy comparison/validation
+
+## Measurement Data.ipynb
+
+The notebook for multi peak fitting of the measurement spectrum. The measurement data itself is not uploaded as it is not mine.
+
+## Coincidence correction.ipynb
+
+The notebook for the calculation of coincidence correction with one given 5th order polynomial fit step by step.
+
+- Loading the data collected from literature (X, f, alpha, I)
+- Creating the various matrices according to Semkow's matrix formalism
+- Validating by comparing the intensities to the calculated epsilon
+- Using the 5th order efficiency fit from the 5cm sample distance simulation in Analysis.ipynb
+- Getting the corrected intensity matrix (here P)
+- Comparison of literature intensitiy matrix (P0) and corrected one (P)
+
+## Efficiencies.ipynb
+
+The notebook for the distance dependent efficiency fit (short and long range set) and the final activity calculation. The data is not uploaded as it is 22GB and github wont allow it.
+
+- Reused helper function codes from Analysis and Coincidence correction
+- A simple run_set storage dict to avoid the constant reloading of 22GB of data whenever I change from one set to the other
+- Fitting of set of r_0s
+- Fitting of r_0's energy dependence
+- 5th order poly fit for initial guess
+- 5th order poly fit over r_0 dependence for whole dataset
+- Comparison of dataset to fit
+- Same for short distance dataset
+
+- Activity calculation using corrected and uncorrected intensities
+- Distance dependent activity deviation calculation
