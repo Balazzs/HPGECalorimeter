@@ -159,7 +159,16 @@ To run the simulation you just have to source the geant4.sh file and run the exe
 
 ## Parameter configuration
 
+If you want to run without GUI then set settings.json:
 
+|     Parameter         |             Meaning                                                                       |                  Example               |
+|-----------------------|-------------------------------------------------------------------------------------------|----------------------------------------|
+|	"macro"					          |                 Name of the macro file to run                                             | "run_mono_energies over_distances.mac" |
+|	"number of threads"		 |          # of threads in case of parallel running                                         |                 16                     |
+|	"sample distance"		   |   Distance between modeled sample and detector \[cm\] (don't forget to set in macro, too) |                 0.2                    |
+|	"sample holder"			    | Whether to model the sample and sample holder geometries                                  |                false                   |
+|	"primary energy type"	|                Mono, table or simdecay                                                    |               "Mono"                   |
+|	"geometry type"	     	|    Empty (for primary gamma counting), simple, real                                       |               "Real"                   |
 
 # Analysis notebook
 
