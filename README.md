@@ -220,7 +220,7 @@ The notebook for the calculation of coincidence correction with one given 5th or
 - Getting the corrected intensity matrix (here P)
 - Comparison of literature intensitiy matrix (P0) and corrected one (P)
 
-### Efficiencies.ipynb
+### Efficiency.ipynb
 
 The notebook for the distance dependent efficiency fit (short and long range set) and the final activity calculation. The data is not uploaded as it is 22GB and github wont allow it.
 
