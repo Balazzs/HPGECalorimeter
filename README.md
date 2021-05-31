@@ -9,6 +9,16 @@
   * [Building the code](#Building-the-code)
     + [Getting the code](#Getting-the-code)
     + [Building with CMAKE](#Building-with-CMAKE)
+- [Running simulations](#Running-simulations)
+  * [Parameter configuration](#Parameter-configuration)
+- [Description of files](#Description-of-files)
+  * [Notebooks](#Notebooks)
+    + [Analysis.ipynb](#Analysis.ipynb)
+    + [Measurement Data.ipynb](#Measurement-Data.ipynb)
+    + [Coincidence correction.ipynb](#Coincidence-correction.ipynb)
+    + [Efficiency.ipynb](#Efficiency.ipynb)
+  * [Data files](#Data-files)
+  * [Thesis](#Thesis)
 
 # Description
 My MSc Thesis at Eötvös Lóránd University (started as a project for Modelling Laboratory)
@@ -168,11 +178,12 @@ If you want to run without GUI then set settings.json:
 |	"primary energy type"	|                Mono, table or simdecay                                                    |               "Mono"                   |
 |	"geometry type"	     	|    Empty (for primary gamma counting), simple, real                                       |               "Real"                   |
 
-# Notebook
+# Description of files
+## Notebooks
 
 There are 4 notebooks in the repo
 
-## Analysis.ipynb
+### Analysis.ipynb
 
 > *some early parts of the analysis notebook might be outdated, there is an issue for updating it but I probably will never get there, but the way calculations were done is clearly visible and with small amount of work (changing file path, rerunning a small simulation with an existing macro, etc.) reproducible.*
 
@@ -194,11 +205,11 @@ The first notebook where initial analysis was done, this was started for my Mode
 - A better distance dependent efficiency simulation (still not the one used in my Thesis) (for 238U decay)
 - RadioActiveDecay vs table generation primary energy comparison/validation
 
-## Measurement Data.ipynb
+### Measurement Data.ipynb
 
 The notebook for multi peak fitting of the measurement spectrum. The measurement data itself is not uploaded as it is not mine.
 
-## Coincidence correction.ipynb
+### Coincidence correction.ipynb
 
 The notebook for the calculation of coincidence correction with one given 5th order polynomial fit step by step.
 
@@ -209,7 +220,7 @@ The notebook for the calculation of coincidence correction with one given 5th or
 - Getting the corrected intensity matrix (here P)
 - Comparison of literature intensitiy matrix (P0) and corrected one (P)
 
-## Efficiencies.ipynb
+### Efficiencies.ipynb
 
 The notebook for the distance dependent efficiency fit (short and long range set) and the final activity calculation. The data is not uploaded as it is 22GB and github wont allow it.
 
@@ -224,3 +235,21 @@ The notebook for the distance dependent efficiency fit (short and long range set
 
 - Activity calculation using corrected and uncorrected intensities
 - Distance dependent activity deviation calculation
+
+## Data files
+
+### U_238.txt
+
+The 238U gamma emission probability table, data taken from http://atomfizika.elte.hu/akos/orak/trad/gammatabla.html. This is the table used for generating photons in table mode, the particle source takes the energy distribution from here.
+
+### 208Tl.xlsx
+
+Transition levels, intensities, alpha values and the feeding factors taken from NuDat (https://www.nndc.bnl.gov/ensnds/208/Pb/beta_decay.pdf). Then the X and G matrix calculated from these. All in an easy to read and load format.
+
+### Appendix.xlsx
+
+The tables seen in the Appendix of my Thesis. The Efficiencies notebook can save the modified efficiencies, and all 2x2 types of distance and energy dependent efficiency results from the 2 simulation sets (short and "long" distance). These are all put into one xlsx and formatted.
+
+## Thesis
+
+My thesis, *Numberical investigation of coincidence-correction in gamma spectroscopy*
